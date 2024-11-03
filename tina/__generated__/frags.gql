@@ -1,0 +1,58 @@
+fragment NavigationParts on Navigation {
+  __typename
+  groups {
+    __typename
+    title
+    links {
+      __typename
+      title
+      path
+      description
+    }
+  }
+}
+
+fragment IntentionsParts on Intentions {
+  __typename
+  title
+  startDate
+  description
+  days {
+    __typename
+    day
+    intentions {
+      __typename
+      hour
+      intention
+    }
+  }
+}
+
+fragment GalleryParts on Gallery {
+  __typename
+  title
+  albums {
+    __typename
+    albumTitle
+    description
+    images {
+      __typename
+      src
+      caption
+      alt
+    }
+  }
+}
+
+fragment ContactParts on Contact {
+  __typename
+  title
+  description
+  googleMapsUrl
+  contactItems {
+    __typename
+    label
+    description
+    value
+  }
+}

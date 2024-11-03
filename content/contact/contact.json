@@ -1,0 +1,26 @@
+{
+  "title": "Dane Kontaktowe",
+  "googleMapsUrl": "https://www.google.com/maps/embed?pb=YOUR_EMBED_URL'",
+  "contactItems": [
+    {
+      "label": "test",
+      "description": "asdsa",
+      "value": "asdasd"
+    },
+    {
+      "label": "Emailt",
+      "description": "Email do kontaktu",
+      "value": "support@example.com"
+    },
+    {
+      "label": "Phone",
+      "description": "Telefon do kontaktu",
+      "value": "+1 (555) 000-0000"
+    },
+    {
+      "label": "Office",
+      "description": "Adres do kontaktu",
+      "value": "100 Smith Street, Melbourne VIC 3000 AU"
+    }
+  ]
+}

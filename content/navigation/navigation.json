@@ -1,0 +1,96 @@
+{
+  "title": "test",
+  "display": true,
+  "groups": [
+    {
+      "title": "Aktualności",
+      "links": [
+        {
+          "title": "Ogłoszenia Parafialne",
+          "path": "/announcements",
+          "description": "Aktualne ogłosznenia na ten tydzień..."
+        },
+        {
+          "title": "Intencje Parafialne",
+          "path": "/intentions",
+          "description": "Aktualne intencje na ten tydzien..."
+        },
+        {
+          "title": "Aktualności",
+          "path": "/news",
+          "description": "Aktualne informacje..."
+        }
+      ]
+    },
+    {
+      "title": "Duszpasterstwo",
+      "links": [
+        {
+          "title": "Sakramenty",
+          "path": "/articles/sacrament",
+          "description": "Informacje o sakramentach..."
+        },
+        {
+          "title": "Pogrzeb",
+          "path": "/article/funeral",
+          "description": "Procedury związane z pogrzebami..."
+        },
+        {
+          "title": "Grupy Duszpasterskie",
+          "path": "/articles/groups",
+          "description": "Lista grup działających przy parafii..."
+        }
+      ]
+    },
+    {
+      "title": "Parafia",
+      "links": [
+        {
+          "title": "Patron",
+          "path": "/article/patron",
+          "description": "Informacje o patronie parafii..."
+        },
+        {
+          "title": "Nabożeństwa",
+          "path": "/article/services",
+          "description": "Harmonogram nabożeństw..."
+        },
+        {
+          "title": "Rada Duszpasterska",
+          "path": "/article/council",
+          "description": "Zadania i działania rady duszpasterskiej..."
+        },
+        {
+          "title": "Historia Parafii",
+          "path": "/article/history",
+          "description": "Historyczne informacje dotyczące parafii..."
+        },
+        {
+          "title": "Kancelaria Parafialna",
+          "path": "/article/office",
+          "description": "Godziny otwarcia i kontakt do kancelarii..."
+        }
+      ]
+    },
+    {
+      "title": "Galeria",
+      "links": [
+        {
+          "title": "Galeria",
+          "path": "/gallery",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "title": "Kontakt",
+      "links": [
+        {
+          "title": "Kontakt",
+          "path": "/contact",
+          "description": ""
+        }
+      ]
+    }
+  ]
+}
