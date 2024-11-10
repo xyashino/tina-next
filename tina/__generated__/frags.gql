@@ -100,3 +100,14 @@ fragment ContactParts on Contact {
   }
   googleMapsUrl
 }
+
+fragment PagesParts on Pages {
+  __typename
+  title
+  slug
+  description
+  template
+  content
+  isPublished
+  createdAt
+}

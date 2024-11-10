@@ -65,6 +65,8 @@ type Query {
   galleryConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: GalleryFilter): GalleryConnection!
   contact(relativePath: String): Contact!
   contactConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ContactFilter): ContactConnection!
+  pages(relativePath: String): Pages!
+  pagesConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PagesFilter): PagesConnection!
 }
 
 input DocumentFilter {
@@ -74,6 +76,7 @@ input DocumentFilter {
   announcements: AnnouncementsFilter
   gallery: GalleryFilter
   contact: ContactFilter
+  pages: PagesFilter
 }
 
 type DocumentConnectionEdges {
@@ -416,6 +419,40 @@ type ContactConnection implements Connection {
   edges: [ContactConnectionEdges]
 }
 
+type Pages implements Node & Document {
+  title: String!
+  slug: String!
+  description: String
+  template: String!
+  content: JSON
+  isPublished: Boolean
+  createdAt: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input PagesFilter {
+  title: StringFilter
+  slug: StringFilter
+  description: StringFilter
+  template: StringFilter
+  content: RichTextFilter
+  isPublished: BooleanFilter
+  createdAt: DatetimeFilter
+}
+
+type PagesConnectionEdges {
+  cursor: String!
+  node: Pages
+}
+
+type PagesConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [PagesConnectionEdges]
+}
+
 type Mutation {
   addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
   updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
@@ -434,6 +471,8 @@ type Mutation {
   createGallery(relativePath: String!, params: GalleryMutation!): Gallery!
   updateContact(relativePath: String!, params: ContactMutation!): Contact!
   createContact(relativePath: String!, params: ContactMutation!): Contact!
+  updatePages(relativePath: String!, params: PagesMutation!): Pages!
+  createPages(relativePath: String!, params: PagesMutation!): Pages!
 }
 
 input DocumentUpdateMutation {
@@ -443,6 +482,7 @@ input DocumentUpdateMutation {
   announcements: AnnouncementsMutation
   gallery: GalleryMutation
   contact: ContactMutation
+  pages: PagesMutation
   relativePath: String
 }
 
@@ -453,6 +493,7 @@ input DocumentMutation {
   announcements: AnnouncementsMutation
   gallery: GalleryMutation
   contact: ContactMutation
+  pages: PagesMutation
 }
 
 input NavigationGroupsLinksMutation {
@@ -536,6 +577,16 @@ input ContactMutation {
   description: String
   contactItems: [ContactContactItemsMutation]
   googleMapsUrl: String
+}
+
+input PagesMutation {
+  title: String
+  slug: String
+  description: String
+  template: String
+  content: JSON
+  isPublished: Boolean
+  createdAt: String
 }
 
 schema {
