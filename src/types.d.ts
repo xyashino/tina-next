@@ -1,46 +1,15 @@
 type NavigationLink = {
+  type: 'link'
   title: string
-  path: string
-  description?: string
+  link: string
 }
 
 type NavigationGroup = {
+  type: 'group'
   title: string
-  links: NavigationLink[]
+  items: Array<{ title: string; link: string }>
 }
 
-type ContactEntry = {
-  label: string
-  value: string
-  description: string
-}
+type NavigationItem = NavigationLink | NavigationGroup
 
-type SiteConfig = {
-  title: string
-  subtitle?: string
-  logo?: {
-    src: string
-    alt: string
-  }
-  socialLinks?: {
-    text: string
-    href: string
-  }[]
-  footerNavLinks?: {
-    text: string
-    href: string
-  }[]
-  hero?: {
-    title?: string
-    text?: string
-    image?: {
-      src: string
-      alt: string
-      caption?: string
-    }
-    actions?: {
-      text: string
-      href: string
-    }[]
-  }
-}
+type NavigationItems = NavigationItem[]

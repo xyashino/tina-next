@@ -61,6 +61,8 @@ type Query {
   galleryConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: GalleryFilter): GalleryConnection!
   contact(relativePath: String): Contact!
   contactConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ContactFilter): ContactConnection!
+  pages(relativePath: String): Pages!
+  pagesConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PagesFilter): PagesConnection!
 }
 
 input DocumentFilter {
@@ -68,6 +70,7 @@ input DocumentFilter {
   intentions: IntentionsFilter
   gallery: GalleryFilter
   contact: ContactFilter
+  pages: PagesFilter
 }
 
 type DocumentConnectionEdges {
@@ -93,16 +96,21 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Navigation | Intentions | Gallery | Contact | Folder
+union DocumentNode = Navigation | Intentions | Gallery | Contact | Pages | Folder
+
+union NavigationGroupsLinksPage = Pages
 
 type NavigationGroupsLinks {
-  title: String!
-  path: String!
+  type: String
+  name: String
+  page: NavigationGroupsLinksPage
+  externalUrl: String
   description: String
 }
 
 type NavigationGroups {
-  title: String!
+  label: String
+  isEnabled: Boolean
   links: [NavigationGroupsLinks]
 }
 
@@ -120,14 +128,26 @@ input StringFilter {
   in: [String]
 }
 
+input BooleanFilter {
+  eq: Boolean
+  exists: Boolean
+}
+
+input NavigationGroupsLinksPageFilter {
+  pages: PagesFilter
+}
+
 input NavigationGroupsLinksFilter {
-  title: StringFilter
-  path: StringFilter
+  type: StringFilter
+  name: StringFilter
+  page: NavigationGroupsLinksPageFilter
+  externalUrl: StringFilter
   description: StringFilter
 }
 
 input NavigationGroupsFilter {
-  title: StringFilter
+  label: StringFilter
+  isEnabled: BooleanFilter
   links: NavigationGroupsLinksFilter
 }
 
@@ -303,6 +323,40 @@ type ContactConnection implements Connection {
   edges: [ContactConnectionEdges]
 }
 
+type Pages implements Node & Document {
+  title: String!
+  slug: String!
+  description: String
+  template: String!
+  content: JSON
+  isPublished: Boolean
+  createdAt: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input PagesFilter {
+  title: StringFilter
+  slug: StringFilter
+  description: StringFilter
+  template: StringFilter
+  content: RichTextFilter
+  isPublished: BooleanFilter
+  createdAt: DatetimeFilter
+}
+
+type PagesConnectionEdges {
+  cursor: String!
+  node: Pages
+}
+
+type PagesConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [PagesConnectionEdges]
+}
+
 type Mutation {
   addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
   updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
@@ -317,6 +371,8 @@ type Mutation {
   createGallery(relativePath: String!, params: GalleryMutation!): Gallery!
   updateContact(relativePath: String!, params: ContactMutation!): Contact!
   createContact(relativePath: String!, params: ContactMutation!): Contact!
+  updatePages(relativePath: String!, params: PagesMutation!): Pages!
+  createPages(relativePath: String!, params: PagesMutation!): Pages!
 }
 
 input DocumentUpdateMutation {
@@ -324,6 +380,7 @@ input DocumentUpdateMutation {
   intentions: IntentionsMutation
   gallery: GalleryMutation
   contact: ContactMutation
+  pages: PagesMutation
   relativePath: String
 }
 
@@ -332,16 +389,20 @@ input DocumentMutation {
   intentions: IntentionsMutation
   gallery: GalleryMutation
   contact: ContactMutation
+  pages: PagesMutation
 }
 
 input NavigationGroupsLinksMutation {
-  title: String
-  path: String
+  type: String
+  name: String
+  page: String
+  externalUrl: String
   description: String
 }
 
 input NavigationGroupsMutation {
-  title: String
+  label: String
+  isEnabled: Boolean
   links: [NavigationGroupsLinksMutation]
 }
 
@@ -394,6 +455,16 @@ input ContactMutation {
   description: String
   googleMapsUrl: String
   contactItems: [ContactContactItemsMutation]
+}
+
+input PagesMutation {
+  title: String
+  slug: String
+  description: String
+  template: String
+  content: JSON
+  isPublished: Boolean
+  createdAt: String
 }
 
 schema {

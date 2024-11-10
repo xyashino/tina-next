@@ -1,5 +1,6 @@
 import { NavigationMenuLink } from '@/components/ui/navigation-menu'
 import { cn } from '@/lib/utils'
+import Link from 'next/link'
 import type { ComponentProps, PropsWithChildren } from 'react'
 
 type ListItemProps = PropsWithChildren<
@@ -15,7 +16,7 @@ export const NavigationListItem = ({
 }: ListItemProps) => (
   <li className={cn('h-full', joinCols && 'col-span-2')}>
     <NavigationMenuLink asChild>
-      <a
+      <Link
         className={cn(
           'block h-full w-full select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
           className
@@ -26,7 +27,7 @@ export const NavigationListItem = ({
         <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
           {children}
         </p>
-      </a>
+      </Link>
     </NavigationMenuLink>
   </li>
 )

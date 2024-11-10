@@ -5,23 +5,20 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu'
-import type { NavigationGroups } from '@/tina/types'
+import { NavigationType } from '@/enum/navigation-type.enum'
 import { NavigationListItem } from './navigation-list-item'
 
 type NavigationGroupItemProps = {
-  group: NavigationGroups
+  data: NavigationItem
 }
 
-export const NavigationGroupItem = ({ group }: NavigationGroupItemProps) => {
-  if (group.links?.length === 1) {
+export const NavigationGroupItem = ({ data }: NavigationGroupItemProps) => {
+  if (data.type === NavigationType.LINK) {
     return (
       <NavigationMenuItem>
         <NavigationMenuLink asChild>
-          <a
-            href={group.links[0].path}
-            className={navigationMenuTriggerStyle()}
-          >
-            {group.title}
+          <a href={data.href} className={navigationMenuTriggerStyle()}>
+            {data.title}
           </a>
         </NavigationMenuLink>
       </NavigationMenuItem>
@@ -30,14 +27,14 @@ export const NavigationGroupItem = ({ group }: NavigationGroupItemProps) => {
 
   return (
     <NavigationMenuItem>
-      <NavigationMenuTrigger>{group.title}</NavigationMenuTrigger>
+      <NavigationMenuTrigger>{data.title}</NavigationMenuTrigger>
       <NavigationMenuContent>
         <ul className="grid grid-cols-2 gap-3 bg-background p-2 md:w-[400px] lg:w-[500px]">
-          {group.links?.map((link, index, array) => (
+          {data.links.map((link, index, array) => (
             <NavigationListItem
               key={link.title}
               title={link.title}
-              href={link.path}
+              href={link.href}
               joinCols={index === array.length - 1 && array.length % 2 !== 0}
             >
               {link.description}

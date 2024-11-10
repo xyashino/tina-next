@@ -282,59 +282,15 @@ var intentionsCollection = {
 };
 
 // tina/collections/navigation-collection.ts
-var linkField = {
-  type: "object",
-  name: "links",
-  label: "Linki",
-  list: true,
-  ui: {
-    itemProps: (item) => ({
-      label: item?.title || "Nowy link"
-    })
-  },
-  indexed: true,
-  fields: [
-    {
-      type: "string",
-      name: "title",
-      label: "Tytu\u0142",
-      required: true,
-      isTitle: true
-    },
-    {
-      type: "string",
-      name: "path",
-      label: "URL",
-      required: true
-    },
-    {
-      type: "string",
-      name: "description",
-      label: "Opis"
-    }
-  ]
-};
-var groupField = {
-  type: "object",
-  name: "groups",
-  label: "Grupy",
-  list: true,
-  ui: {
-    itemProps: (item) => ({
-      label: item?.title || "Nowa grupa"
-    })
-  },
-  indexed: true,
-  fields: [
-    {
-      type: "string",
-      name: "title",
-      label: "Tytu\u0142",
-      required: true,
-      isTitle: true
-    },
-    linkField
-  ]
+import { ReferenceField, TextField } from "tinacms";
+var getElementType = (props, num) => {
+  const currentField = props.field.name.split(".").slice(0, num);
+  const formValues = props.form.getState().values;
+  let selectedValue = formValues;
+  for (let i = 0; i < num; i++) {
+    selectedValue = selectedValue[currentField[i]];
+  }
+  return selectedValue.type;
 };
 var navigationCollection = {
   name: "navigation",
@@ -342,16 +298,203 @@ var navigationCollection = {
   path: "content/navigation",
   format: "json",
   ui: {
-    filename: {
-      readonly: true,
-      slugify: () => "navigation"
-    },
     allowedActions: {
       create: false,
       delete: false
     }
   },
-  fields: [groupField]
+  fields: [
+    {
+      type: "object",
+      name: "groups",
+      label: "Grupy",
+      list: true,
+      ui: {
+        defaultItem: {
+          isEnabled: true
+        },
+        itemProps: (item) => {
+          const linksLength = item?.links?.length || 0;
+          if (linksLength === 0) {
+            return {
+              label: `Nowa Grupa/Link`
+            };
+          }
+          const isLink = item?.links?.length === 1;
+          return {
+            label: `(${isLink ? "Link" : "Grupa"}) - ${item?.label}`
+          };
+        }
+      },
+      fields: [
+        {
+          type: "string",
+          name: "label",
+          label: "Nazwa grupy"
+        },
+        {
+          type: "boolean",
+          name: "isEnabled",
+          label: "Aktywny"
+        },
+        {
+          type: "object",
+          name: "links",
+          label: "Podstrony",
+          description: "Gdy b\u0119dzie tylko jedna podstrona, to grupa b\u0119dzie renderowana jako link.",
+          list: true,
+          ui: {
+            defaultItem: {
+              type: "page" /* PAGE */
+            },
+            itemProps: (item) => {
+              return {
+                label: item?.name
+              };
+            }
+          },
+          fields: [
+            {
+              type: "string",
+              name: "type",
+              label: "Typ linku",
+              options: [
+                {
+                  label: "Strona",
+                  value: "page" /* PAGE */
+                },
+                {
+                  label: "URL zewn\u0119trzny",
+                  value: "external" /* EXTERNAL */
+                }
+              ]
+            },
+            {
+              type: "string",
+              name: "name",
+              label: "Nazwa linku"
+            },
+            {
+              type: "reference",
+              name: "page",
+              label: "Strona",
+              collections: ["pages"],
+              ui: {
+                component: (props) => {
+                  const selectedValue = getElementType(props, 4);
+                  if (selectedValue === "external" /* EXTERNAL */) {
+                    return null;
+                  }
+                  return ReferenceField(props);
+                }
+              }
+            },
+            {
+              type: "string",
+              name: "externalUrl",
+              label: "URL zewn\u0119trzny",
+              ui: {
+                component: (props) => {
+                  const selectedValue = getElementType(props, 4);
+                  if (selectedValue === "page" /* PAGE */) {
+                    return null;
+                  }
+                  return TextField(props);
+                }
+              }
+            },
+            {
+              type: "string",
+              name: "description",
+              label: "Opis linku",
+              ui: {
+                component: "textarea"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+// tina/collections/pages-collection.ts
+var pagesCollection = {
+  name: "pages",
+  label: "Strony",
+  path: "content/pages",
+  format: "json",
+  ui: {
+    filename: {
+      readonly: true,
+      slugify: (values) => {
+        return `${values?.slug?.toLowerCase().replace(/ /g, "-")}` || "";
+      }
+    }
+  },
+  fields: [
+    {
+      type: "string",
+      name: "title",
+      label: "Tytu\u0142",
+      required: true,
+      isTitle: true
+    },
+    {
+      type: "string",
+      name: "slug",
+      label: "URL strony",
+      required: true,
+      description: "Np. '/o-nas' utworzy stron\u0119 '/o-nas'"
+    },
+    {
+      type: "string",
+      name: "description",
+      label: "Opis",
+      ui: {
+        component: "textarea"
+      }
+    },
+    {
+      type: "string",
+      name: "template",
+      label: "Szablon strony",
+      options: [
+        {
+          label: "Strona domowa",
+          value: "home"
+        },
+        {
+          label: "Strona standardowa",
+          value: "default"
+        },
+        {
+          label: "Strona kontaktowa",
+          value: "contact"
+        }
+      ],
+      required: true
+    },
+    {
+      type: "rich-text",
+      name: "content",
+      label: "Tre\u015B\u0107",
+      isBody: true
+    },
+    {
+      type: "boolean",
+      name: "isPublished",
+      label: "Opublikowany"
+    },
+    {
+      type: "datetime",
+      name: "createdAt",
+      label: "Data utworzenia",
+      ui: {
+        dateFormat: "DD MMMM YYYY"
+      }
+    }
+  ]
 };
 
 // tina/config.ts
@@ -368,7 +511,8 @@ var config_default = defineConfig({
       navigationCollection,
       intentionsCollection,
       galleryCollection,
-      contactCollection
+      contactCollection,
+      pagesCollection
     ]
   }
 });

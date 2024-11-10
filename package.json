@@ -25,7 +25,8 @@
     "react-dom": "^18",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
-    "tinacms": "^1.6.0"
+    "tinacms": "^1.6.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@tinacms/cli": "^1.5.42",

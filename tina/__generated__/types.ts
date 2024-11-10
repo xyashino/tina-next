@@ -89,6 +89,8 @@ export type Query = {
   galleryConnection: GalleryConnection;
   contact: Contact;
   contactConnection: ContactConnection;
+  pages: Pages;
+  pagesConnection: PagesConnection;
 };
 
 
@@ -172,11 +174,27 @@ export type QueryContactConnectionArgs = {
   filter?: InputMaybe<ContactFilter>;
 };
 
+
+export type QueryPagesArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryPagesConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<PagesFilter>;
+};
+
 export type DocumentFilter = {
   navigation?: InputMaybe<NavigationFilter>;
   intentions?: InputMaybe<IntentionsFilter>;
   gallery?: InputMaybe<GalleryFilter>;
   contact?: InputMaybe<ContactFilter>;
+  pages?: InputMaybe<PagesFilter>;
 };
 
 export type DocumentConnectionEdges = {
@@ -216,18 +234,23 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Navigation | Intentions | Gallery | Contact | Folder;
+export type DocumentNode = Navigation | Intentions | Gallery | Contact | Pages | Folder;
+
+export type NavigationGroupsLinksPage = Pages;
 
 export type NavigationGroupsLinks = {
   __typename?: 'NavigationGroupsLinks';
-  title: Scalars['String']['output'];
-  path: Scalars['String']['output'];
+  type?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  page?: Maybe<NavigationGroupsLinksPage>;
+  externalUrl?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
 };
 
 export type NavigationGroups = {
   __typename?: 'NavigationGroups';
-  title: Scalars['String']['output'];
+  label?: Maybe<Scalars['String']['output']>;
+  isEnabled?: Maybe<Scalars['Boolean']['output']>;
   links?: Maybe<Array<Maybe<NavigationGroupsLinks>>>;
 };
 
@@ -246,14 +269,26 @@ export type StringFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type BooleanFilter = {
+  eq?: InputMaybe<Scalars['Boolean']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type NavigationGroupsLinksPageFilter = {
+  pages?: InputMaybe<PagesFilter>;
+};
+
 export type NavigationGroupsLinksFilter = {
-  title?: InputMaybe<StringFilter>;
-  path?: InputMaybe<StringFilter>;
+  type?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+  page?: InputMaybe<NavigationGroupsLinksPageFilter>;
+  externalUrl?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
 };
 
 export type NavigationGroupsFilter = {
-  title?: InputMaybe<StringFilter>;
+  label?: InputMaybe<StringFilter>;
+  isEnabled?: InputMaybe<BooleanFilter>;
   links?: InputMaybe<NavigationGroupsLinksFilter>;
 };
 
@@ -445,6 +480,43 @@ export type ContactConnection = Connection & {
   edges?: Maybe<Array<Maybe<ContactConnectionEdges>>>;
 };
 
+export type Pages = Node & Document & {
+  __typename?: 'Pages';
+  title: Scalars['String']['output'];
+  slug: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  template: Scalars['String']['output'];
+  content?: Maybe<Scalars['JSON']['output']>;
+  isPublished?: Maybe<Scalars['Boolean']['output']>;
+  createdAt?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type PagesFilter = {
+  title?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  template?: InputMaybe<StringFilter>;
+  content?: InputMaybe<RichTextFilter>;
+  isPublished?: InputMaybe<BooleanFilter>;
+  createdAt?: InputMaybe<DatetimeFilter>;
+};
+
+export type PagesConnectionEdges = {
+  __typename?: 'PagesConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Pages>;
+};
+
+export type PagesConnection = Connection & {
+  __typename?: 'PagesConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<PagesConnectionEdges>>>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addPendingDocument: DocumentNode;
@@ -460,6 +532,8 @@ export type Mutation = {
   createGallery: Gallery;
   updateContact: Contact;
   createContact: Contact;
+  updatePages: Pages;
+  createPages: Pages;
 };
 
 
@@ -543,11 +617,24 @@ export type MutationCreateContactArgs = {
   params: ContactMutation;
 };
 
+
+export type MutationUpdatePagesArgs = {
+  relativePath: Scalars['String']['input'];
+  params: PagesMutation;
+};
+
+
+export type MutationCreatePagesArgs = {
+  relativePath: Scalars['String']['input'];
+  params: PagesMutation;
+};
+
 export type DocumentUpdateMutation = {
   navigation?: InputMaybe<NavigationMutation>;
   intentions?: InputMaybe<IntentionsMutation>;
   gallery?: InputMaybe<GalleryMutation>;
   contact?: InputMaybe<ContactMutation>;
+  pages?: InputMaybe<PagesMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -556,16 +643,20 @@ export type DocumentMutation = {
   intentions?: InputMaybe<IntentionsMutation>;
   gallery?: InputMaybe<GalleryMutation>;
   contact?: InputMaybe<ContactMutation>;
+  pages?: InputMaybe<PagesMutation>;
 };
 
 export type NavigationGroupsLinksMutation = {
-  title?: InputMaybe<Scalars['String']['input']>;
-  path?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  page?: InputMaybe<Scalars['String']['input']>;
+  externalUrl?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type NavigationGroupsMutation = {
-  title?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  isEnabled?: InputMaybe<Scalars['Boolean']['input']>;
   links?: InputMaybe<Array<InputMaybe<NavigationGroupsLinksMutation>>>;
 };
 
@@ -620,7 +711,17 @@ export type ContactMutation = {
   contactItems?: InputMaybe<Array<InputMaybe<ContactContactItemsMutation>>>;
 };
 
-export type NavigationPartsFragment = { __typename: 'Navigation', groups?: Array<{ __typename: 'NavigationGroups', title: string, links?: Array<{ __typename: 'NavigationGroupsLinks', title: string, path: string, description?: string | null } | null> | null } | null> | null };
+export type PagesMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  template?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['JSON']['input']>;
+  isPublished?: InputMaybe<Scalars['Boolean']['input']>;
+  createdAt?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type NavigationPartsFragment = { __typename: 'Navigation', groups?: Array<{ __typename: 'NavigationGroups', label?: string | null, isEnabled?: boolean | null, links?: Array<{ __typename: 'NavigationGroupsLinks', type?: string | null, name?: string | null, externalUrl?: string | null, description?: string | null, page?: { __typename: 'Pages', title: string, slug: string, description?: string | null, template: string, content?: any | null, isPublished?: boolean | null, createdAt?: string | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } | null> | null };
 
 export type IntentionsPartsFragment = { __typename: 'Intentions', title: string, startDate: string, description?: string | null, days?: Array<{ __typename: 'IntentionsDays', day: string, intentions?: Array<{ __typename: 'IntentionsDaysIntentions', hour: string, intention: any } | null> | null } | null> | null };
 
@@ -628,12 +729,14 @@ export type GalleryPartsFragment = { __typename: 'Gallery', title: string, album
 
 export type ContactPartsFragment = { __typename: 'Contact', title: string, description?: string | null, googleMapsUrl: string, contactItems?: Array<{ __typename: 'ContactContactItems', label: string, description?: string | null, value?: string | null } | null> | null };
 
+export type PagesPartsFragment = { __typename: 'Pages', title: string, slug: string, description?: string | null, template: string, content?: any | null, isPublished?: boolean | null, createdAt?: string | null };
+
 export type NavigationQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type NavigationQuery = { __typename?: 'Query', navigation: { __typename: 'Navigation', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, groups?: Array<{ __typename: 'NavigationGroups', title: string, links?: Array<{ __typename: 'NavigationGroupsLinks', title: string, path: string, description?: string | null } | null> | null } | null> | null } };
+export type NavigationQuery = { __typename?: 'Query', navigation: { __typename: 'Navigation', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, groups?: Array<{ __typename: 'NavigationGroups', label?: string | null, isEnabled?: boolean | null, links?: Array<{ __typename: 'NavigationGroupsLinks', type?: string | null, name?: string | null, externalUrl?: string | null, description?: string | null, page?: { __typename: 'Pages', title: string, slug: string, description?: string | null, template: string, content?: any | null, isPublished?: boolean | null, createdAt?: string | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } | null> | null } };
 
 export type NavigationConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -645,7 +748,7 @@ export type NavigationConnectionQueryVariables = Exact<{
 }>;
 
 
-export type NavigationConnectionQuery = { __typename?: 'Query', navigationConnection: { __typename?: 'NavigationConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NavigationConnectionEdges', cursor: string, node?: { __typename: 'Navigation', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, groups?: Array<{ __typename: 'NavigationGroups', title: string, links?: Array<{ __typename: 'NavigationGroupsLinks', title: string, path: string, description?: string | null } | null> | null } | null> | null } | null } | null> | null } };
+export type NavigationConnectionQuery = { __typename?: 'Query', navigationConnection: { __typename?: 'NavigationConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NavigationConnectionEdges', cursor: string, node?: { __typename: 'Navigation', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, groups?: Array<{ __typename: 'NavigationGroups', label?: string | null, isEnabled?: boolean | null, links?: Array<{ __typename: 'NavigationGroupsLinks', type?: string | null, name?: string | null, externalUrl?: string | null, description?: string | null, page?: { __typename: 'Pages', title: string, slug: string, description?: string | null, template: string, content?: any | null, isPublished?: boolean | null, createdAt?: string | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } | null> | null } | null } | null> | null } };
 
 export type IntentionsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -704,16 +807,60 @@ export type ContactConnectionQueryVariables = Exact<{
 
 export type ContactConnectionQuery = { __typename?: 'Query', contactConnection: { __typename?: 'ContactConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ContactConnectionEdges', cursor: string, node?: { __typename: 'Contact', id: string, title: string, description?: string | null, googleMapsUrl: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, contactItems?: Array<{ __typename: 'ContactContactItems', label: string, description?: string | null, value?: string | null } | null> | null } | null } | null> | null } };
 
+export type PagesQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type PagesQuery = { __typename?: 'Query', pages: { __typename: 'Pages', id: string, title: string, slug: string, description?: string | null, template: string, content?: any | null, isPublished?: boolean | null, createdAt?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type PagesConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<PagesFilter>;
+}>;
+
+
+export type PagesConnectionQuery = { __typename?: 'Query', pagesConnection: { __typename?: 'PagesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PagesConnectionEdges', cursor: string, node?: { __typename: 'Pages', id: string, title: string, slug: string, description?: string | null, template: string, content?: any | null, isPublished?: boolean | null, createdAt?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
 export const NavigationPartsFragmentDoc = gql`
     fragment NavigationParts on Navigation {
   __typename
   groups {
     __typename
-    title
+    label
+    isEnabled
     links {
       __typename
-      title
-      path
+      type
+      name
+      page {
+        ... on Pages {
+          __typename
+          title
+          slug
+          description
+          template
+          content
+          isPublished
+          createdAt
+        }
+        ... on Document {
+          _sys {
+            filename
+            basename
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+      }
+      externalUrl
       description
     }
   }
@@ -765,6 +912,18 @@ export const ContactPartsFragmentDoc = gql`
     description
     value
   }
+}
+    `;
+export const PagesPartsFragmentDoc = gql`
+    fragment PagesParts on Pages {
+  __typename
+  title
+  slug
+  description
+  template
+  content
+  isPublished
+  createdAt
 }
     `;
 export const NavigationDocument = gql`
@@ -987,6 +1146,61 @@ export const ContactConnectionDocument = gql`
   }
 }
     ${ContactPartsFragmentDoc}`;
+export const PagesDocument = gql`
+    query pages($relativePath: String!) {
+  pages(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...PagesParts
+  }
+}
+    ${PagesPartsFragmentDoc}`;
+export const PagesConnectionDocument = gql`
+    query pagesConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PagesFilter) {
+  pagesConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...PagesParts
+      }
+    }
+  }
+}
+    ${PagesPartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
@@ -1013,6 +1227,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     contactConnection(variables?: ContactConnectionQueryVariables, options?: C): Promise<{data: ContactConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactConnectionQueryVariables, query: string}> {
         return requester<{data: ContactConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactConnectionQueryVariables, query: string}, ContactConnectionQueryVariables>(ContactConnectionDocument, variables, options);
+      },
+    pages(variables: PagesQueryVariables, options?: C): Promise<{data: PagesQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PagesQueryVariables, query: string}> {
+        return requester<{data: PagesQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PagesQueryVariables, query: string}, PagesQueryVariables>(PagesDocument, variables, options);
+      },
+    pagesConnection(variables?: PagesConnectionQueryVariables, options?: C): Promise<{data: PagesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PagesConnectionQueryVariables, query: string}> {
+        return requester<{data: PagesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PagesConnectionQueryVariables, query: string}, PagesConnectionQueryVariables>(PagesConnectionDocument, variables, options);
       }
     };
   }

@@ -2,27 +2,20 @@ import {
   NavigationMenu,
   NavigationMenuList
 } from '@/components/ui/navigation-menu'
-import type { NavigationGroups } from '@/tina/types'
 import { NavigationGroupItem } from './navigation-group'
+import { NavigationType } from '@/enum/navigation-type.enum'
 
 interface DesktopNavigationProps {
-  data: (NavigationGroups | null)[] | null
+  data: NavigationItem[]
 }
 
 export const DesktopNavigation = ({ data }: DesktopNavigationProps) => {
-  if (!data) {
-    return null
-  }
-
   return (
     <NavigationMenu className="hidden w-full max-w-3xl lg:block">
       <NavigationMenuList>
-        {data?.map(group => {
-          if (!group) {
-            return null
-          }
-          return <NavigationGroupItem key={group.title} group={group} />
-        })}
+        {data.map(group => (
+          <NavigationGroupItem key={group.title} data={group} />
+        ))}
       </NavigationMenuList>
     </NavigationMenu>
   )

@@ -1,93 +1,120 @@
 {
   "title": "test",
   "display": true,
+  "label": "Strona Główna",
+  "type": "group",
+  "link": {
+    "type": "external",
+    "page": "",
+    "externalUrl": "/"
+  },
+  "isEnabled": true,
+  "items": [],
   "groups": [
     {
-      "title": "Aktualności",
+      "label": "Aktualności",
+      "isEnabled": true,
       "links": [
         {
-          "title": "Ogłoszenia Parafialne",
-          "path": "/announcements",
+          "type": "external",
+          "name": "Ogłoszenia Parafialne",
+          "externalUrl": "/announcements",
           "description": "Aktualne ogłosznenia na ten tydzień..."
         },
         {
-          "title": "Intencje Parafialne",
-          "path": "/intentions",
+          "type": "external",
+          "name": "Intencje Parafialne",
+          "externalUrl": "/intentions",
           "description": "Aktualne intencje na ten tydzien..."
         },
         {
-          "title": "Aktualności",
-          "path": "/news",
+          "type": "external",
+          "name": "Aktualności",
+          "externalUrl": "/news",
           "description": "Aktualne informacje..."
         }
       ]
     },
     {
-      "title": "Duszpasterstwo",
+      "label": "Duszpasterstwo",
+      "isEnabled": true,
       "links": [
         {
-          "title": "Sakramenty",
-          "path": "/articles/sacrament",
+          "type": "external",
+          "name": "Sakramenty",
+          "externalUrl": "/articles/sacrament",
           "description": "Informacje o sakramentach..."
         },
         {
-          "title": "Pogrzeb",
-          "path": "/article/funeral",
+          "type": "external",
+          "name": "Pogrzeb",
+          "externalUrl": "/article/funeral",
           "description": "Procedury związane z pogrzebami..."
         },
         {
-          "title": "Grupy Duszpasterskie",
-          "path": "/articles/groups",
+          "type": "external",
+          "name": "Grupy Duszpasterskie",
+          "externalUrl": "/articles/groups",
           "description": "Lista grup działających przy parafii..."
         }
       ]
     },
     {
-      "title": "Parafia",
+      "label": "Parafia",
+      "isEnabled": true,
       "links": [
         {
-          "title": "Patron",
-          "path": "/article/patron",
+          "type": "external",
+          "name": "Patron",
+          "externalUrl": "/article/patron",
           "description": "Informacje o patronie parafii..."
         },
         {
-          "title": "Nabożeństwa",
-          "path": "/article/services",
+          "type": "external",
+          "name": "Nabożeństwa",
+          "externalUrl": "/article/services",
           "description": "Harmonogram nabożeństw..."
         },
         {
-          "title": "Rada Duszpasterska",
-          "path": "/article/council",
+          "type": "external",
+          "name": "Rada Duszpasterska",
+          "externalUrl": "/article/council",
           "description": "Zadania i działania rady duszpasterskiej..."
         },
         {
-          "title": "Historia Parafii",
-          "path": "/article/history",
+          "type": "external",
+          "name": "Historia Parafii",
+          "externalUrl": "/article/history",
           "description": "Historyczne informacje dotyczące parafii..."
         },
         {
-          "title": "Kancelaria Parafialna",
-          "path": "/article/office",
+          "type": "external",
+          "name": "Kancelaria Parafialna",
+          "externalUrl": "/article/office",
           "description": "Godziny otwarcia i kontakt do kancelarii..."
         }
       ]
     },
     {
-      "title": "Galeria",
+      "label": "Galeria",
+      "isEnabled": true,
       "links": [
         {
-          "title": "Galeria",
-          "path": "/gallery",
+          "type": "external",
+          "name": "Galeria",
+          "externalUrl": "/gallery",
           "description": ""
         }
       ]
     },
     {
-      "title": "Kontakt",
+      "label": "Kontakt",
+      "isEnabled": true,
       "links": [
         {
-          "title": "Kontakt",
-          "path": "/contact",
+          "type": "external",
+          "name": "Kontakt",
+          "externalUrl": "/contact",
           "description": ""
         }
       ]

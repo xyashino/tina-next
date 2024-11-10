@@ -1,5 +1,6 @@
 {
   "title": "Dane Kontaktowe",
+  "description": "Test",
   "googleMapsUrl": "https://www.google.com/maps/embed?pb=YOUR_EMBED_URL'",
   "contactItems": [
     {

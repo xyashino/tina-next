@@ -2,11 +2,36 @@ fragment NavigationParts on Navigation {
   __typename
   groups {
     __typename
-    title
+    label
+    isEnabled
     links {
       __typename
-      title
-      path
+      type
+      name
+      page {
+        ... on Pages {
+          __typename
+          title
+          slug
+          description
+          template
+          content
+          isPublished
+          createdAt
+        }
+        ... on Document {
+          _sys {
+            filename
+            basename
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+      }
+      externalUrl
       description
     }
   }
@@ -55,4 +80,15 @@ fragment ContactParts on Contact {
     description
     value
   }
+}
+
+fragment PagesParts on Pages {
+  __typename
+  title
+  slug
+  description
+  template
+  content
+  isPublished
+  createdAt
 }

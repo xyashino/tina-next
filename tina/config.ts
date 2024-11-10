@@ -3,7 +3,8 @@ import {
   contactCollection,
   galleryCollection,
   intentionsCollection,
-  navigationCollection
+  navigationCollection,
+  pagesCollection
 } from './collections'
 
 export default defineConfig({
@@ -21,7 +22,8 @@ export default defineConfig({
       navigationCollection,
       intentionsCollection,
       galleryCollection,
-      contactCollection
+      contactCollection,
+      pagesCollection
     ]
   }
 })
