@@ -13,3 +13,12 @@ type NavigationGroup = {
 type NavigationItem = NavigationLink | NavigationGroup
 
 type NavigationItems = NavigationItem[]
+
+type IntentionsDay = {
+  day: string
+  date: string | null | undefined
+  intentions: {
+    hour: string
+    intention: any
+  }[]
+}

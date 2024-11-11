@@ -324,6 +324,7 @@ export type IntentionsDays = {
 export type Intentions = Node & Document & {
   __typename?: 'Intentions';
   title: Scalars['String']['output'];
+  isActive: Scalars['Boolean']['output'];
   startDate: Scalars['String']['output'];
   description?: Maybe<Scalars['String']['output']>;
   days?: Maybe<Array<Maybe<IntentionsDays>>>;
@@ -358,6 +359,7 @@ export type IntentionsDaysFilter = {
 
 export type IntentionsFilter = {
   title?: InputMaybe<StringFilter>;
+  isActive?: InputMaybe<BooleanFilter>;
   startDate?: InputMaybe<DatetimeFilter>;
   description?: InputMaybe<StringFilter>;
   days?: InputMaybe<IntentionsDaysFilter>;
@@ -676,6 +678,7 @@ export type IntentionsDaysMutation = {
 
 export type IntentionsMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
+  isActive?: InputMaybe<Scalars['Boolean']['input']>;
   startDate?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   days?: InputMaybe<Array<InputMaybe<IntentionsDaysMutation>>>;
@@ -723,7 +726,7 @@ export type PagesMutation = {
 
 export type NavigationPartsFragment = { __typename: 'Navigation', groups?: Array<{ __typename: 'NavigationGroups', label?: string | null, isEnabled?: boolean | null, links?: Array<{ __typename: 'NavigationGroupsLinks', type?: string | null, name?: string | null, externalUrl?: string | null, description?: string | null, page?: { __typename: 'Pages', title: string, slug: string, description?: string | null, template: string, content?: any | null, isPublished?: boolean | null, createdAt?: string | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } | null> | null };
 
-export type IntentionsPartsFragment = { __typename: 'Intentions', title: string, startDate: string, description?: string | null, days?: Array<{ __typename: 'IntentionsDays', day: string, intentions?: Array<{ __typename: 'IntentionsDaysIntentions', hour: string, intention: any } | null> | null } | null> | null };
+export type IntentionsPartsFragment = { __typename: 'Intentions', title: string, isActive: boolean, startDate: string, description?: string | null, days?: Array<{ __typename: 'IntentionsDays', day: string, intentions?: Array<{ __typename: 'IntentionsDaysIntentions', hour: string, intention: any } | null> | null } | null> | null };
 
 export type GalleryPartsFragment = { __typename: 'Gallery', title: string, albums?: Array<{ __typename: 'GalleryAlbums', albumTitle: string, description?: string | null, images?: Array<{ __typename: 'GalleryAlbumsImages', src: string, caption?: string | null, alt: string } | null> | null } | null> | null };
 
@@ -755,7 +758,7 @@ export type IntentionsQueryVariables = Exact<{
 }>;
 
 
-export type IntentionsQuery = { __typename?: 'Query', intentions: { __typename: 'Intentions', id: string, title: string, startDate: string, description?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, days?: Array<{ __typename: 'IntentionsDays', day: string, intentions?: Array<{ __typename: 'IntentionsDaysIntentions', hour: string, intention: any } | null> | null } | null> | null } };
+export type IntentionsQuery = { __typename?: 'Query', intentions: { __typename: 'Intentions', id: string, title: string, isActive: boolean, startDate: string, description?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, days?: Array<{ __typename: 'IntentionsDays', day: string, intentions?: Array<{ __typename: 'IntentionsDaysIntentions', hour: string, intention: any } | null> | null } | null> | null } };
 
 export type IntentionsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -767,7 +770,7 @@ export type IntentionsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type IntentionsConnectionQuery = { __typename?: 'Query', intentionsConnection: { __typename?: 'IntentionsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'IntentionsConnectionEdges', cursor: string, node?: { __typename: 'Intentions', id: string, title: string, startDate: string, description?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, days?: Array<{ __typename: 'IntentionsDays', day: string, intentions?: Array<{ __typename: 'IntentionsDaysIntentions', hour: string, intention: any } | null> | null } | null> | null } | null } | null> | null } };
+export type IntentionsConnectionQuery = { __typename?: 'Query', intentionsConnection: { __typename?: 'IntentionsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'IntentionsConnectionEdges', cursor: string, node?: { __typename: 'Intentions', id: string, title: string, isActive: boolean, startDate: string, description?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, days?: Array<{ __typename: 'IntentionsDays', day: string, intentions?: Array<{ __typename: 'IntentionsDaysIntentions', hour: string, intention: any } | null> | null } | null> | null } | null } | null> | null } };
 
 export type GalleryQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -870,6 +873,7 @@ export const IntentionsPartsFragmentDoc = gql`
     fragment IntentionsParts on Intentions {
   __typename
   title
+  isActive
   startDate
   description
   days {

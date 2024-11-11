@@ -1,0 +1,138 @@
+{
+  "title": "Intencje parafialne",
+  "isActive": true,
+  "startDate": "2024-11-10T23:00:00.000Z",
+  "description": "TEst",
+  "days": [
+    {
+      "day": "0",
+      "date": "2024-11-03T23:00:00.000Z",
+      "intentions": [
+        {
+          "hour": "07:00",
+          "intention": "Za + Stanisława i Marię Kowalskich"
+        },
+        {
+          "hour": "09:00",
+          "intention": "Za + Janinę i Tadeusza Nowaków oraz zmarłych z rodziny"
+        },
+        {
+          "hour": "11:00",
+          "intention": "W intencji Parafian"
+        },
+        {
+          "hour": "18:00",
+          "intention": "Za + Józefa Nowaka w 5. rocznicę śmierci"
+        }
+      ]
+    },
+    {
+      "day": "1",
+      "date": "2024-11-12T16:03:00.266Z",
+      "intentions": [
+        {
+          "hour": "07:00",
+          "intention": "O błogosławieństwo Boże dla rodziny Wiśniewskich"
+        },
+        {
+          "hour": "09:00",
+          "intention": "Za + Kazimierza Lewandowskiego w 30. dzień po śmierci"
+        },
+        {
+          "hour": "18:00",
+          "intention": "Za + rodziców Annę i Jana Malinowskich"
+        }
+      ]
+    },
+    {
+      "day": "2",
+      "date": "2024-11-13T16:03:00.266Z",
+      "intentions": [
+        {
+          "hour": "07:00",
+          "intention": "W intencji Róż Różańcowych"
+        },
+        {
+          "hour": "09:00",
+          "intention": "Za + Zofię Adamczyk w 2. rocznicę śmierci"
+        },
+        {
+          "hour": "18:00",
+          "intention": "Dziękczynna w 25. rocznicę ślubu Barbary i Marka"
+        }
+      ]
+    },
+    {
+      "day": "3",
+      "date": "2024-11-14T16:03:00.266Z",
+      "intentions": [
+        {
+          "hour": "07:00",
+          "intention": "O zdrowie i Boże błogosławieństwo dla Krystyny"
+        },
+        {
+          "hour": "09:00",
+          "intention": "Za + Henryka Dąbrowskiego i zmarłych z rodziny"
+        },
+        {
+          "hour": "18:00",
+          "intention": "W intencji próśb i podziękowań do MBNP"
+        }
+      ]
+    },
+    {
+      "day": "4",
+      "date": "2024-11-15T16:03:00.266Z",
+      "intentions": [
+        {
+          "hour": "07:00",
+          "intention": "Za + Władysława i Mariannę Szymańskich"
+        },
+        {
+          "hour": "09:00",
+          "intention": "O powołania kapłańskie i zakonne"
+        },
+        {
+          "hour": "18:00",
+          "intention": "Dziękczynna z okazji 18. urodzin Michała"
+        }
+      ]
+    },
+    {
+      "day": "5",
+      "date": "2024-11-16T16:03:00.266Z",
+      "intentions": [
+        {
+          "hour": "07:00",
+          "intention": "Za + Stefana Wojciechowskiego w 1. rocznicę śmierci"
+        },
+        {
+          "hour": "09:00",
+          "intention": "W intencji chorych Parafian"
+        },
+        {
+          "hour": "18:00",
+          "intention": "O Boże błogosławieństwo dla Anny i Piotra w rocznicę ślubu"
+        }
+      ]
+    },
+    {
+      "day": "6",
+      "date": "2024-11-10T16:03:00.266Z",
+      "intentions": [
+        {
+          "hour": "07:00",
+          "intention": "Za + Helenę Wójcik w 1. rocznicę śmierci"
+        },
+        {
+          "hour": "09:00",
+          "intention": "Za dusze w czyśćcu cierpiące"
+        },
+        {
+          "hour": "18:00",
+          "intention": "Dziękczynna z prośbą o dalsze błogosławieństwo dla Zofii z okazji 80. urodzin"
+        }
+      ]
+    }
+  ]
+}

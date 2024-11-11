@@ -1,15 +1,10 @@
 {
   "title": "Dane Kontaktowe",
-  "description": "Test",
+  "description": "",
   "googleMapsUrl": "https://www.google.com/maps/embed?pb=YOUR_EMBED_URL'",
   "contactItems": [
     {
-      "label": "test",
-      "description": "asdsa",
-      "value": "asdasd"
-    },
-    {
-      "label": "Emailt",
+      "label": "Email",
       "description": "Email do kontaktu",
       "value": "support@example.com"
     },

@@ -10,12 +10,18 @@ const POLISH_DAYS = [
   'Niedziela'
 ]
 
-const nextMonday = () => {
+const getNextDay = (day: number) => {
   const today = new Date()
-  const nextMonday = new Date(today)
-  nextMonday.setDate(today.getDate() + ((1 + 7 - today.getDay()) % 7))
-  return nextMonday.toISOString()
+  const nextDay = new Date(today)
+  nextDay.setDate(today.getDate() + ((day + 7 - (today.getDay() - 1)) % 7))
+  return nextDay.toISOString()
 }
+
+const INITIAL_INTENTIONS = Array.from({ length: 7 }, (_, i) => i).map(day => ({
+  day: day.toString(),
+  date: getNextDay(day),
+  intentions: [{ hour: '09:00', intention: '' }]
+}))
 
 export const intentionsCollection: Collection = {
   name: 'intentions',
@@ -24,37 +30,9 @@ export const intentionsCollection: Collection = {
   format: 'json',
   defaultItem: {
     title: 'Intencje parafialne',
-    startDate: nextMonday(),
-    days: [
-      {
-        day: '0',
-        intentions: [{ hour: '09:00', intention: 'Treść intencji' }]
-      },
-      {
-        day: '1',
-        intentions: [{ hour: '10:00', intention: 'Treść intencji' }]
-      },
-      {
-        day: '2',
-        intentions: [{ hour: '11:00', intention: 'Treść intencji' }]
-      },
-      {
-        day: '3',
-        intentions: [{ hour: '12:00', intention: 'Treść intencji' }]
-      },
-      {
-        day: '4',
-        intentions: [{ hour: '13:00', intention: 'Treść intencji' }]
-      },
-      {
-        day: '5',
-        intentions: [{ hour: '14:00', intention: 'Treść intencji' }]
-      },
-      {
-        day: '6',
-        intentions: [{ hour: '15:00', intention: 'Treść intencji' }]
-      }
-    ]
+    startDate: getNextDay(0),
+    days: INITIAL_INTENTIONS,
+    isActive: true
   },
   ui: {
     filename: {
@@ -72,10 +50,17 @@ export const intentionsCollection: Collection = {
       isTitle: true
     },
     {
+      name: 'isActive',
+      label: 'Aktywny',
+      type: 'boolean',
+      required: true
+    },
+    {
       name: 'startDate',
       label: 'Data rozpoczęcia',
       type: 'datetime',
-      required: true
+      required: true,
+      searchable: true
     },
     {
       name: 'description',
@@ -100,6 +85,7 @@ export const intentionsCollection: Collection = {
           type: 'string',
           label: 'Dzień Tygodnia',
           required: true,
+          isTitle: true,
           options: Array.from({ length: 7 }, (_, i) => i).map(day => ({
             label: POLISH_DAYS[day],
             value: day.toString()

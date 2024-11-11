@@ -178,6 +178,7 @@ type IntentionsDays {
 
 type Intentions implements Node & Document {
   title: String!
+  isActive: Boolean!
   startDate: String!
   description: String
   days: [IntentionsDays]
@@ -212,6 +213,7 @@ input IntentionsDaysFilter {
 
 input IntentionsFilter {
   title: StringFilter
+  isActive: BooleanFilter
   startDate: DatetimeFilter
   description: StringFilter
   days: IntentionsDaysFilter
@@ -422,6 +424,7 @@ input IntentionsDaysMutation {
 
 input IntentionsMutation {
   title: String
+  isActive: Boolean
   startDate: String
   description: String
   days: [IntentionsDaysMutation]

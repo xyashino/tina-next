@@ -156,12 +156,17 @@ var POLISH_DAYS = [
   "Sobota",
   "Niedziela"
 ];
-var nextMonday = () => {
+var getNextDay = (day) => {
   const today = /* @__PURE__ */ new Date();
-  const nextMonday2 = new Date(today);
-  nextMonday2.setDate(today.getDate() + (1 + 7 - today.getDay()) % 7);
-  return nextMonday2.toISOString();
+  const nextDay = new Date(today);
+  nextDay.setDate(today.getDate() + (day + 7 - (today.getDay() - 1)) % 7);
+  return nextDay.toISOString();
 };
+var INITIAL_INTENTIONS = Array.from({ length: 7 }, (_, i) => i).map((day) => ({
+  day: day.toString(),
+  date: getNextDay(day),
+  intentions: [{ hour: "09:00", intention: "" }]
+}));
 var intentionsCollection = {
   name: "intentions",
   label: "Intencje",
@@ -169,37 +174,9 @@ var intentionsCollection = {
   format: "json",
   defaultItem: {
     title: "Intencje parafialne",
-    startDate: nextMonday(),
-    days: [
-      {
-        day: "0",
-        intentions: [{ hour: "09:00", intention: "Tre\u015B\u0107 intencji" }]
-      },
-      {
-        day: "1",
-        intentions: [{ hour: "10:00", intention: "Tre\u015B\u0107 intencji" }]
-      },
-      {
-        day: "2",
-        intentions: [{ hour: "11:00", intention: "Tre\u015B\u0107 intencji" }]
-      },
-      {
-        day: "3",
-        intentions: [{ hour: "12:00", intention: "Tre\u015B\u0107 intencji" }]
-      },
-      {
-        day: "4",
-        intentions: [{ hour: "13:00", intention: "Tre\u015B\u0107 intencji" }]
-      },
-      {
-        day: "5",
-        intentions: [{ hour: "14:00", intention: "Tre\u015B\u0107 intencji" }]
-      },
-      {
-        day: "6",
-        intentions: [{ hour: "15:00", intention: "Tre\u015B\u0107 intencji" }]
-      }
-    ]
+    startDate: getNextDay(0),
+    days: INITIAL_INTENTIONS,
+    isActive: true
   },
   ui: {
     filename: {
@@ -216,10 +193,17 @@ var intentionsCollection = {
       isTitle: true
     },
     {
+      name: "isActive",
+      label: "Aktywny",
+      type: "boolean",
+      required: true
+    },
+    {
       name: "startDate",
       label: "Data rozpocz\u0119cia",
       type: "datetime",
-      required: true
+      required: true,
+      searchable: true
     },
     {
       name: "description",
@@ -244,6 +228,7 @@ var intentionsCollection = {
           type: "string",
           label: "Dzie\u0144 Tygodnia",
           required: true,
+          isTitle: true,
           options: Array.from({ length: 7 }, (_, i) => i).map((day) => ({
             label: POLISH_DAYS[day],
             value: day.toString()
