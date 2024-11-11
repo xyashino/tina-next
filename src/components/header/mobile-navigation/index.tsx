@@ -3,7 +3,7 @@ import { Menu } from 'lucide-react'
 import { NavContent } from './nav-content'
 
 type MobileNavigationProps = {
-  data: NavigationGroup[]
+  data: NavigationItem[]
 }
 export const MobileNavigation = ({ data }: MobileNavigationProps) => {
   return (

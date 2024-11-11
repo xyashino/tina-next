@@ -16,12 +16,14 @@ export const NavAccordionItem = ({ group }: NavAccordionItemProps) => (
         {group.links.map(link => (
           <a
             key={link.title}
-            href={link.path}
+            href={link.href}
             className="rounded-md px-2 py-1.5 text-sm hover:bg-accent hover:text-accent-foreground"
           >
             <div className="font-medium">{link.title}</div>
             {link.description && (
-              <p className="text-xs text-muted-foreground">{link.description}</p>
+              <p className="text-xs text-muted-foreground">
+                {link.description}
+              </p>
             )}
           </a>
         ))}
