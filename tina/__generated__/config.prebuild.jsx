@@ -641,8 +641,7 @@ var config_default = defineConfig({
       intentionsCollection,
       anoucementsCollection,
       galleryCollection,
-      contactCollection,
-      pagesCollection
+      contactCollection
     ]
   }
 });
