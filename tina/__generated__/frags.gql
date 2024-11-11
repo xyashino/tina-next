@@ -54,18 +54,30 @@ fragment IntentionsParts on Intentions {
   }
 }
 
-fragment GalleryParts on Gallery {
+fragment PagesParts on Pages {
   __typename
   title
-  albums {
+  slug
+  description
+  template
+  content
+  isPublished
+  createdAt
+}
+
+fragment GalleryParts on Gallery {
+  __typename
+  groups {
     __typename
-    albumTitle
-    description
+    groupTitle
+    isEnabled
     images {
       __typename
-      src
-      caption
-      alt
+      title
+      isEnabled
+      link
+      coverPhoto
+      description
     }
   }
 }
@@ -81,15 +93,4 @@ fragment ContactParts on Contact {
     description
     value
   }
-}
-
-fragment PagesParts on Pages {
-  __typename
-  title
-  slug
-  description
-  template
-  content
-  isPublished
-  createdAt
 }

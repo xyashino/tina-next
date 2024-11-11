@@ -22,3 +22,19 @@ type IntentionsDay = {
     intention: any
   }[]
 }
+
+interface GalleryImage {
+  title: string
+  link: string
+  coverPhoto: string
+  description?: string
+}
+
+interface GalleryGroup {
+  groupTitle: string
+  images: GalleryImage[]
+}
+
+interface GalleryData {
+  groups: GalleryGroup[]
+}

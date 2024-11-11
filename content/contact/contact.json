@@ -9,12 +9,12 @@
       "value": "support@example.com"
     },
     {
-      "label": "Phone",
+      "label": "Telefon",
       "description": "Telefon do kontaktu",
       "value": "+1 (555) 000-0000"
     },
     {
-      "label": "Office",
+      "label": "Biuro",
       "description": "Adres do kontaktu",
       "value": "100 Smith Street, Melbourne VIC 3000 AU"
     }

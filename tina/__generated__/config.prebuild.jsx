@@ -71,73 +71,76 @@ var contactCollection = {
 import "tinacms";
 var galleryCollection = {
   name: "gallery",
-  label: "Gallery",
+  label: "Galeria",
   path: "content/gallery",
-  format: "mdx",
+  format: "json",
   ui: {
-    router: ({ document }) => {
-      return `/gallery/${document._sys.filename}`;
+    allowedActions: {
+      create: false,
+      delete: false
     }
   },
   fields: [
     {
-      type: "string",
-      name: "title",
-      label: "Group Title",
-      required: true
-    },
-    {
       type: "object",
-      name: "albums",
-      label: "Albums",
+      name: "groups",
+      label: "Grupy",
       list: true,
       ui: {
         itemProps: (item) => ({
-          label: item.albumTitle
+          label: item.groupTitle
         })
       },
       fields: [
         {
           type: "string",
-          name: "albumTitle",
-          label: "Album Title",
-          required: true
+          name: "groupTitle",
+          label: "Nazwa grupy",
+          required: true,
+          isTitle: true
         },
         {
-          type: "string",
-          name: "description",
-          label: "Album Description",
-          ui: {
-            component: "textarea"
-          }
+          type: "boolean",
+          name: "isEnabled",
+          label: "Aktywny"
         },
         {
           type: "object",
           name: "images",
-          label: "Images",
+          label: "Albumy",
           list: true,
           ui: {
             itemProps: (item) => ({
-              label: item.caption || "Image"
+              label: item.title
             })
           },
           fields: [
             {
+              type: "string",
+              name: "title",
+              label: "Nazwa albumu",
+              required: true
+            },
+            {
+              type: "boolean",
+              name: "isEnabled",
+              label: "Aktywny"
+            },
+            {
+              type: "string",
+              name: "link",
+              label: "Link",
+              required: true
+            },
+            {
               type: "image",
-              name: "src",
-              label: "Image",
-              required: true
+              name: "coverPhoto",
+              label: "Zdj\u0119cie g\u0142\xF3wne"
             },
             {
               type: "string",
-              name: "caption",
-              label: "Caption"
-            },
-            {
-              type: "string",
-              name: "alt",
-              label: "Alt Text",
-              required: true
+              name: "description",
+              label: "Opis"
             }
           ]
         }
@@ -491,13 +494,19 @@ var config_default = defineConfig({
     outputFolder: "admin",
     publicFolder: "public"
   },
+  media: {
+    tina: {
+      publicFolder: "public",
+      mediaRoot: "uploads"
+    }
+  },
   schema: {
     collections: [
       navigationCollection,
       intentionsCollection,
+      pagesCollection,
       galleryCollection,
-      contactCollection,
-      pagesCollection
+      contactCollection
     ]
   }
 });

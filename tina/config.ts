@@ -16,14 +16,20 @@ export default defineConfig({
     outputFolder: 'admin',
     publicFolder: 'public'
   },
+  media: {
+    tina: {
+      publicFolder: 'public',
+      mediaRoot: 'uploads'
+    }
+  },
 
   schema: {
     collections: [
       navigationCollection,
       intentionsCollection,
+      pagesCollection,
       galleryCollection,
-      contactCollection,
-      pagesCollection
+      contactCollection
     ]
   }
 })
