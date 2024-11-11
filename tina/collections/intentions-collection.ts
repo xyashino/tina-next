@@ -18,6 +18,12 @@ const INITIAL_INTENTIONS = Array.from({ length: 7 }, (_, i) => i).map(day => ({
   intentions: [{ hour: '09:00', intention: '' }]
 }))
 
+const INITIAL_INTENTIONS = Array.from({ length: 7 }, (_, i) => i).map(day => ({
+  day: day.toString(),
+  date: getNextDay(day),
+  intentions: [{ hour: '09:00', intention: '' }]
+}))
+
 export const intentionsCollection: Collection = {
   name: 'intentions',
   label: 'Intencje',
