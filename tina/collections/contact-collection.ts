@@ -5,6 +5,9 @@ export const contactCollection: Collection = {
   label: 'Kontakt',
   path: 'content/contact',
   format: 'json',
+  match: {
+    include: 'contact'
+  },
   ui: {
     filename: {
       readonly: true,
@@ -13,7 +16,8 @@ export const contactCollection: Collection = {
     allowedActions: {
       create: false,
       delete: false
-    }
+    },
+    router: ({ document }) => `/contact`
   },
   fields: [
     {
@@ -26,12 +30,6 @@ export const contactCollection: Collection = {
       name: 'description',
       label: 'Opis',
       type: 'string'
-    },
-    {
-      name: 'googleMapsUrl',
-      label: 'Google Maps URL',
-      type: 'string',
-      required: true
     },
     {
       name: 'contactItems',
@@ -61,6 +59,12 @@ export const contactCollection: Collection = {
           type: 'string'
         }
       ]
+    },
+    {
+      name: 'googleMapsUrl',
+      label: 'Google Maps URL',
+      type: 'string',
+      required: true
     }
   ]
 }

@@ -1,26 +1,17 @@
-import { ContactGoogleMap } from '@/components/contact/contact-google-map'
-import { ContactItem } from '@/components/contact/contact-item'
-import { PageTitle } from '@/components/page-title'
+import { ClientContact } from '@/app/contact/client-contact'
+import { ServerContact } from '@/app/contact/server-contact'
 import client from '@/tina/client'
+import { draftMode } from 'next/headers'
 
 export default async function ContactPage() {
-  const response = await client.queries.contact({
+  const pageResponse = await client.queries.contact({
     relativePath: 'contact.json'
   })
+  const { isEnabled } = draftMode()
 
-  const contact = response.data.contact
+  if (!isEnabled) {
+    return <ClientContact {...pageResponse} />
+  }
 
-  return (
-    <section className="animate-fadeIn my-auto h-full bg-background">
-      <div className="container mx-auto">
-        <PageTitle title={contact.title} description={contact.description} />
-        <div className="mt-6 flex flex-col">
-          <div className="flex flex-col divide-y divide-foreground">
-            {contact.contactItems?.map(group => <ContactItem {...group} />)}
-          </div>
-          <ContactGoogleMap googleMapsUrl={contact.googleMapsUrl ?? ''} />
-        </div>
-      </div>
-    </section>
-  )
+  return <ServerContact {...pageResponse.data} />
 }
