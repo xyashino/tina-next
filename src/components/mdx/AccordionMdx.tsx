@@ -24,7 +24,7 @@ export const AccordionMdx = (props: any) => {
   if (!parsedProps.success) return null
   const { type, options } = parsedProps.data
   return (
-    <Accordion type={type}>
+    <Accordion type={type} className="not-prose">
       {options.map(option => (
         <AccordionItem value={option.uniqueId} key={option.uniqueId}>
           <AccordionTrigger className="text-lg lg:text-2xl font-semibold text-start">

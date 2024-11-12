@@ -18,7 +18,7 @@ export const TabsViewMdx = (props: any) => {
   if (!parsedProps.success) return null
   const { groups } = parsedProps.data
   return (
-    <Tabs defaultValue={groups[0].tabId} className="w-full">
+    <Tabs defaultValue={groups[0].tabId} className="w-full not-prose">
       <TabsList className="w-full border-b border-foreground">
         {groups.map(group => (
           <TabsTrigger
@@ -32,7 +32,11 @@ export const TabsViewMdx = (props: any) => {
       </TabsList>
 
       {groups.map(group => (
-        <TabsContent key={`content-${group.tabId}`} value={group.tabId}>
+        <TabsContent
+          key={`content-${group.tabId}`}
+          value={group.tabId}
+          className="prose"
+        >
           <TinaMarkdown content={group.tabContent} />
         </TabsContent>
       ))}
