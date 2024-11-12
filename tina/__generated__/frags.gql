@@ -11,10 +11,11 @@ fragment NavigationParts on Navigation {
       page {
         ... on Page {
           __typename
-          title
           isPublished
           showTitle
           slug
+          image
+          title
           body
         }
         ... on Document {
@@ -37,10 +38,11 @@ fragment NavigationParts on Navigation {
 
 fragment PageParts on Page {
   __typename
-  title
   isPublished
   showTitle
   slug
+  image
+  title
   body
 }
 

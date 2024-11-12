@@ -311,14 +311,22 @@ export type NavigationConnection = Connection & {
 
 export type Page = Node & Document & {
   __typename?: 'Page';
-  title: Scalars['String']['output'];
   isPublished?: Maybe<Scalars['Boolean']['output']>;
   showTitle?: Maybe<Scalars['Boolean']['output']>;
   slug: Scalars['String']['output'];
+  image?: Maybe<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
   body?: Maybe<Scalars['JSON']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
+};
+
+export type ImageFilter = {
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type RichTextFilter = {
@@ -354,10 +362,11 @@ export type PageBodyFilter = {
 };
 
 export type PageFilter = {
-  title?: InputMaybe<StringFilter>;
   isPublished?: InputMaybe<BooleanFilter>;
   showTitle?: InputMaybe<BooleanFilter>;
   slug?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  title?: InputMaybe<StringFilter>;
   body?: InputMaybe<PageBodyFilter>;
 };
 
@@ -459,13 +468,6 @@ export type Gallery = Node & Document & {
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
-};
-
-export type ImageFilter = {
-  startsWith?: InputMaybe<Scalars['String']['input']>;
-  eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type GalleryGroupsImagesFilter = {
@@ -691,10 +693,11 @@ export type NavigationMutation = {
 };
 
 export type PageMutation = {
-  title?: InputMaybe<Scalars['String']['input']>;
   isPublished?: InputMaybe<Scalars['Boolean']['input']>;
   showTitle?: InputMaybe<Scalars['Boolean']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
@@ -747,9 +750,9 @@ export type ContactMutation = {
   googleMapsUrl?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type NavigationPartsFragment = { __typename: 'Navigation', groups?: Array<{ __typename: 'NavigationGroups', label?: string | null, isEnabled?: boolean | null, links?: Array<{ __typename: 'NavigationGroupsLinks', type?: string | null, name?: string | null, externalUrl?: string | null, description?: string | null, page?: { __typename: 'Page', title: string, isPublished?: boolean | null, showTitle?: boolean | null, slug: string, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } | null> | null };
+export type NavigationPartsFragment = { __typename: 'Navigation', groups?: Array<{ __typename: 'NavigationGroups', label?: string | null, isEnabled?: boolean | null, links?: Array<{ __typename: 'NavigationGroupsLinks', type?: string | null, name?: string | null, externalUrl?: string | null, description?: string | null, page?: { __typename: 'Page', isPublished?: boolean | null, showTitle?: boolean | null, slug: string, image?: string | null, title: string, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } | null> | null };
 
-export type PagePartsFragment = { __typename: 'Page', title: string, isPublished?: boolean | null, showTitle?: boolean | null, slug: string, body?: any | null };
+export type PagePartsFragment = { __typename: 'Page', isPublished?: boolean | null, showTitle?: boolean | null, slug: string, image?: string | null, title: string, body?: any | null };
 
 export type IntentionsPartsFragment = { __typename: 'Intentions', title: string, isActive: boolean, startDate: string, description?: string | null, days?: Array<{ __typename: 'IntentionsDays', day: string, intentions?: Array<{ __typename: 'IntentionsDaysIntentions', hour: string, intention: any } | null> | null } | null> | null };
 
@@ -762,7 +765,7 @@ export type NavigationQueryVariables = Exact<{
 }>;
 
 
-export type NavigationQuery = { __typename?: 'Query', navigation: { __typename: 'Navigation', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, groups?: Array<{ __typename: 'NavigationGroups', label?: string | null, isEnabled?: boolean | null, links?: Array<{ __typename: 'NavigationGroupsLinks', type?: string | null, name?: string | null, externalUrl?: string | null, description?: string | null, page?: { __typename: 'Page', title: string, isPublished?: boolean | null, showTitle?: boolean | null, slug: string, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } | null> | null } };
+export type NavigationQuery = { __typename?: 'Query', navigation: { __typename: 'Navigation', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, groups?: Array<{ __typename: 'NavigationGroups', label?: string | null, isEnabled?: boolean | null, links?: Array<{ __typename: 'NavigationGroupsLinks', type?: string | null, name?: string | null, externalUrl?: string | null, description?: string | null, page?: { __typename: 'Page', isPublished?: boolean | null, showTitle?: boolean | null, slug: string, image?: string | null, title: string, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } | null> | null } };
 
 export type NavigationConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -774,14 +777,14 @@ export type NavigationConnectionQueryVariables = Exact<{
 }>;
 
 
-export type NavigationConnectionQuery = { __typename?: 'Query', navigationConnection: { __typename?: 'NavigationConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NavigationConnectionEdges', cursor: string, node?: { __typename: 'Navigation', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, groups?: Array<{ __typename: 'NavigationGroups', label?: string | null, isEnabled?: boolean | null, links?: Array<{ __typename: 'NavigationGroupsLinks', type?: string | null, name?: string | null, externalUrl?: string | null, description?: string | null, page?: { __typename: 'Page', title: string, isPublished?: boolean | null, showTitle?: boolean | null, slug: string, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } | null> | null } | null } | null> | null } };
+export type NavigationConnectionQuery = { __typename?: 'Query', navigationConnection: { __typename?: 'NavigationConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NavigationConnectionEdges', cursor: string, node?: { __typename: 'Navigation', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, groups?: Array<{ __typename: 'NavigationGroups', label?: string | null, isEnabled?: boolean | null, links?: Array<{ __typename: 'NavigationGroupsLinks', type?: string | null, name?: string | null, externalUrl?: string | null, description?: string | null, page?: { __typename: 'Page', isPublished?: boolean | null, showTitle?: boolean | null, slug: string, image?: string | null, title: string, body?: any | null, id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } | null> | null } | null } | null> | null } };
 
 export type PageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, title: string, isPublished?: boolean | null, showTitle?: boolean | null, slug: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, isPublished?: boolean | null, showTitle?: boolean | null, slug: string, image?: string | null, title: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type PageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -793,7 +796,7 @@ export type PageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, title: string, isPublished?: boolean | null, showTitle?: boolean | null, slug: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, isPublished?: boolean | null, showTitle?: boolean | null, slug: string, image?: string | null, title: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type IntentionsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -866,10 +869,11 @@ export const NavigationPartsFragmentDoc = gql`
       page {
         ... on Page {
           __typename
-          title
           isPublished
           showTitle
           slug
+          image
+          title
           body
         }
         ... on Document {
@@ -893,10 +897,11 @@ export const NavigationPartsFragmentDoc = gql`
 export const PagePartsFragmentDoc = gql`
     fragment PageParts on Page {
   __typename
-  title
   isPublished
   showTitle
   slug
+  image
+  title
   body
 }
     `;

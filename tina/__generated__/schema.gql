@@ -167,14 +167,22 @@ type NavigationConnection implements Connection {
 }
 
 type Page implements Node & Document {
-  title: String!
   isPublished: Boolean
   showTitle: Boolean
   slug: String!
+  image: String
+  title: String!
   body: JSON
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
+}
+
+input ImageFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
 }
 
 input RichTextFilter {
@@ -210,10 +218,11 @@ input PageBodyFilter {
 }
 
 input PageFilter {
-  title: StringFilter
   isPublished: BooleanFilter
   showTitle: BooleanFilter
   slug: StringFilter
+  image: ImageFilter
+  title: StringFilter
   body: PageBodyFilter
 }
 
@@ -305,13 +314,6 @@ type Gallery implements Node & Document {
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
-}
-
-input ImageFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
-  in: [String]
 }
 
 input GalleryGroupsImagesFilter {
@@ -437,10 +439,11 @@ input NavigationMutation {
 }
 
 input PageMutation {
-  title: String
   isPublished: Boolean
   showTitle: Boolean
   slug: String
+  image: String
+  title: String
   body: JSON
 }
 

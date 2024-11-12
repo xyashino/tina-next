@@ -16,12 +16,6 @@ export const pageCollection: Collection = {
   },
   fields: [
     {
-      type: 'string',
-      name: 'title',
-      label: 'Title',
-      required: true
-    },
-    {
       type: 'boolean',
       name: 'isPublished',
       label: 'Opublikuj'
@@ -42,10 +36,32 @@ export const pageCollection: Collection = {
       }
     },
     {
+      type: 'image',
+      name: 'image',
+      label: 'Image'
+    },
+    {
+      type: 'string',
+      name: 'title',
+      label: 'Title',
+      required: true
+    },
+    {
       type: 'rich-text',
       name: 'body',
       label: 'Body',
       isBody: true,
+      toolbarOverride: [
+        'heading',
+        'bold',
+        'italic',
+        'link',
+        'list',
+        'quote',
+        'table',
+        'image',
+        'embed'
+      ],
       templates: [
         {
           name: 'Accordion',
