@@ -22,7 +22,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           'bg-background text-foreground min-h-screen m-0 p-0 min-w-screen'
         )}
       >
-        <div class="mx-auto flex min-h-screen flex-col font-serif selection:bg-foreground selection:p-2 selection:text-background">
+        <div className="mx-auto flex min-h-screen flex-col font-serif selection:bg-foreground selection:p-2 selection:text-background">
           <Header />
           <main className="mx-auto w-full max-w-3xl grow px-2">{children}</main>
           <Footer />

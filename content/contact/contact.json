@@ -1,10 +1,10 @@
 {
   "title": "Dane Kontaktowe",
-  "description": "Testowa Stroma",
+  "description": "Test",
   "contactItems": [
     {
       "label": "Email",
-      "description": "Email do kontaktu",
+      "description": "Email do kontaktu Test",
       "value": "support@example.com"
     },
     {

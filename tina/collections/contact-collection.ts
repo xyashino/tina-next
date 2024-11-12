@@ -17,7 +17,7 @@ export const contactCollection: Collection = {
       create: false,
       delete: false
     },
-    router: ({ document }) => `/contact`
+    router: () => `/contact`
   },
   fields: [
     {

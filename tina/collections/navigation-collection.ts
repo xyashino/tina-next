@@ -1,6 +1,5 @@
-import { ListField, ReferenceField, TextField, type Collection } from 'tinacms'
+import { ReferenceField, TextField, type Collection } from 'tinacms'
 import { LinkType } from '../../src/enum/link-type.enum'
-import { NavigationType } from '../../src/enum/navigation-type.enum'
 
 const getElementType = (props: any, num: number) => {
   const currentField = props.field.name.split('.').slice(0, num)
@@ -74,7 +73,7 @@ export const navigationCollection: Collection = {
               return {
                 label: item?.name
               }
-            },
+            }
           },
           fields: [
             {
@@ -101,7 +100,7 @@ export const navigationCollection: Collection = {
               type: 'reference',
               name: 'page',
               label: 'Strona',
-              collections: ['pages'],
+              collections: ['page'],
               ui: {
                 component: (props: any) => {
                   const selectedValue = getElementType(props, 4)

@@ -2,135 +2,128 @@
   "title": "Intencje parafialne",
   "isActive": true,
   "startDate": "2024-11-10T23:00:00.000Z",
-  "description": "TEst",
+  "description": "Test",
   "days": [
     {
       "day": "0",
-      "date": "2024-11-03T23:00:00.000Z",
       "intentions": [
         {
           "hour": "07:00",
-          "intention": "Za + Stanisława i Marię Kowalskich"
+          "intention": "Za + Stanisława i Marię Kowalskich\n"
         },
         {
           "hour": "09:00",
-          "intention": "Za + Janinę i Tadeusza Nowaków oraz zmarłych z rodziny"
+          "intention": "Za + Janinę i Tadeusza Nowaków oraz zmarłych z rodziny\n"
         },
         {
           "hour": "11:00",
-          "intention": "W intencji Parafian"
+          "intention": "W intencji Parafian\n"
         },
         {
           "hour": "18:00",
-          "intention": "Za + Józefa Nowaka w 5. rocznicę śmierci"
+          "intention": "Za + Józefa Nowaka w 5. rocznicę śmierci\n"
         }
       ]
     },
     {
       "day": "1",
-      "date": "2024-11-12T16:03:00.266Z",
       "intentions": [
         {
           "hour": "07:00",
-          "intention": "O błogosławieństwo Boże dla rodziny Wiśniewskich"
+          "intention": "O błogosławieństwo Boże dla rodziny Wiśniewskich\n"
         },
         {
           "hour": "09:00",
-          "intention": "Za + Kazimierza Lewandowskiego w 30. dzień po śmierci"
+          "intention": "Za + Kazimierza Lewandowskiego w 30. dzień po śmierci\n"
         },
         {
           "hour": "18:00",
-          "intention": "Za + rodziców Annę i Jana Malinowskich"
+          "intention": "Za + rodziców Annę i Jana Malinowskich\n"
         }
       ]
     },
     {
       "day": "2",
-      "date": "2024-11-13T16:03:00.266Z",
       "intentions": [
         {
           "hour": "07:00",
-          "intention": "W intencji Róż Różańcowych"
+          "intention": "W intencji Róż Różańcowych\n"
         },
         {
           "hour": "09:00",
-          "intention": "Za + Zofię Adamczyk w 2. rocznicę śmierci"
+          "intention": "Za + Zofię Adamczyk w 2. rocznicę śmierci\n"
         },
         {
           "hour": "18:00",
-          "intention": "Dziękczynna w 25. rocznicę ślubu Barbary i Marka"
+          "intention": "Dziękczynna w 25. rocznicę ślubu Barbary i Marka\n"
         }
       ]
     },
     {
       "day": "3",
-      "date": "2024-11-14T16:03:00.266Z",
       "intentions": [
         {
           "hour": "07:00",
-          "intention": "O zdrowie i Boże błogosławieństwo dla Krystyny"
+          "intention": "O zdrowie i Boże błogosławieństwo dla Krystyny\n"
         },
         {
           "hour": "09:00",
-          "intention": "Za + Henryka Dąbrowskiego i zmarłych z rodziny"
+          "intention": "Za + Henryka Dąbrowskiego i zmarłych z rodziny\n"
         },
         {
           "hour": "18:00",
-          "intention": "W intencji próśb i podziękowań do MBNP"
+          "intention": "W intencji próśb i podziękowań do MBNP\n"
         }
       ]
     },
     {
       "day": "4",
-      "date": "2024-11-15T16:03:00.266Z",
       "intentions": [
         {
           "hour": "07:00",
-          "intention": "Za + Władysława i Mariannę Szymańskich"
+          "intention": "Za + Władysława i Mariannę Szymańskich\n"
         },
         {
           "hour": "09:00",
-          "intention": "O powołania kapłańskie i zakonne"
+          "intention": "O powołania kapłańskie i zakonne\n"
         },
         {
           "hour": "18:00",
-          "intention": "Dziękczynna z okazji 18. urodzin Michała"
+          "intention": "Dziękczynna z okazji 18. urodzin Michała\n"
         }
       ]
     },
     {
       "day": "5",
-      "date": "2024-11-16T16:03:00.266Z",
       "intentions": [
         {
           "hour": "07:00",
-          "intention": "Za + Stefana Wojciechowskiego w 1. rocznicę śmierci"
+          "intention": "Za + Stefana Wojciechowskiego w 1. rocznicę śmierci\n"
         },
         {
           "hour": "09:00",
-          "intention": "W intencji chorych Parafian"
+          "intention": "W intencji chorych Parafian\n"
         },
         {
           "hour": "18:00",
-          "intention": "O Boże błogosławieństwo dla Anny i Piotra w rocznicę ślubu"
+          "intention": "O Boże błogosławieństwo dla Anny i Piotra w rocznicę ślubu\n"
         }
       ]
     },
     {
       "day": "6",
-      "date": "2024-11-10T16:03:00.266Z",
       "intentions": [
         {
           "hour": "07:00",
-          "intention": "Za + Helenę Wójcik w 1. rocznicę śmierci"
+          "intention": "Za + Helenę Wójcik w 1. rocznicę śmierci\n"
         },
         {
           "hour": "09:00",
-          "intention": "Za dusze w czyśćcu cierpiące"
+          "intention": "Za dusze w czyśćcu cierpiące\n"
         },
         {
           "hour": "18:00",
-          "intention": "Dziękczynna z prośbą o dalsze błogosławieństwo dla Zofii z okazji 80. urodzin"
+          "intention": "Dziękczynna z prośbą o dalsze błogosławieństwo dla Zofii z okazji 80. urodzin\n"
         }
       ]
     }

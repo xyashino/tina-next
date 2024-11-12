@@ -75,7 +75,7 @@ export default {
       borderColor: {
         main: 'hsl(var(--border))'
       },
-      typography: theme => ({
+      typography: (theme: any) => ({
         dante: {
           css: {
             '--tw-prose-body': theme('colors.foreground'),
@@ -118,6 +118,7 @@ export default {
               fontSize: '1.3125em',
               fontStyle: 'italic',
               fontWeight: 'normal',
+              backgroundColor: theme('colors.accent'),
               lineHeight: 1.4,
               paddingLeft: 0,
               '@media (min-width: theme("screens.sm"))': {

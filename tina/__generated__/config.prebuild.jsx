@@ -7,6 +7,9 @@ var contactCollection = {
   label: "Kontakt",
   path: "content/contact",
   format: "json",
+  match: {
+    include: "contact"
+  },
   ui: {
     filename: {
       readonly: true,
@@ -15,7 +18,8 @@ var contactCollection = {
     allowedActions: {
       create: false,
       delete: false
-    }
+    },
+    router: () => `/contact`
   },
   fields: [
     {
@@ -28,12 +32,6 @@ var contactCollection = {
       name: "description",
       label: "Opis",
       type: "string"
-    },
-    {
-      name: "googleMapsUrl",
-      label: "Google Maps URL",
-      type: "string",
-      required: true
     },
     {
       name: "contactItems",
@@ -63,6 +61,12 @@ var contactCollection = {
           type: "string"
         }
       ]
+    },
+    {
+      name: "googleMapsUrl",
+      label: "Google Maps URL",
+      type: "string",
+      required: true
     }
   ]
 };
@@ -366,7 +370,7 @@ var navigationCollection = {
               type: "reference",
               name: "page",
               label: "Strona",
-              collections: ["pages"],
+              collections: ["page"],
               ui: {
                 component: (props) => {
                   const selectedValue = getElementType(props, 4);
@@ -406,81 +410,149 @@ var navigationCollection = {
   ]
 };
 
-// tina/collections/pages-collection.ts
-var pagesCollection = {
-  name: "pages",
+// tina/collections/page-collection.ts
+var pageCollection = {
+  name: "page",
   label: "Strony",
-  path: "content/pages",
-  format: "json",
+  path: "content/page",
+  format: "mdx",
   ui: {
     filename: {
       readonly: true,
-      slugify: (values) => {
-        return `${values?.slug?.toLowerCase().replace(/ /g, "-")}` || "";
-      }
+      slugify: (data) => data?.slug?.toLowerCase().replace(/\s+/g, "-")
+    },
+    router: ({ document }) => {
+      return `/page/${document?._sys.filename}`;
     }
   },
   fields: [
     {
       type: "string",
       name: "title",
-      label: "Tytu\u0142",
-      required: true,
-      isTitle: true
-    },
-    {
-      type: "string",
-      name: "slug",
-      label: "URL strony",
-      required: true,
-      description: "Np. '/o-nas' utworzy stron\u0119 '/o-nas'"
-    },
-    {
-      type: "string",
-      name: "description",
-      label: "Opis",
-      ui: {
-        component: "textarea"
-      }
-    },
-    {
-      type: "string",
-      name: "template",
-      label: "Szablon strony",
-      options: [
-        {
-          label: "Strona domowa",
-          value: "home"
-        },
-        {
-          label: "Strona standardowa",
-          value: "default"
-        },
-        {
-          label: "Strona kontaktowa",
-          value: "contact"
-        }
-      ],
+      label: "Title",
       required: true
-    },
-    {
-      type: "rich-text",
-      name: "content",
-      label: "Tre\u015B\u0107",
-      isBody: true
     },
     {
       type: "boolean",
       name: "isPublished",
-      label: "Opublikowany"
+      label: "Opublikuj"
     },
     {
-      type: "datetime",
-      name: "createdAt",
-      label: "Data utworzenia",
+      type: "boolean",
+      name: "showTitle",
+      label: "Show title"
+    },
+    {
+      type: "string",
+      name: "slug",
+      label: "Slug",
+      required: true,
       ui: {
-        dateFormat: "DD MMMM YYYY"
+        description: 'Preferowana warto\u015B\u0107 to "slug" w j\u0119zyku angielskim',
+        format: (value) => value?.toLowerCase().replace(/\s+/g, "-") || ""
       }
+    },
+    {
+      type: "rich-text",
+      name: "body",
+      label: "Body",
+      isBody: true,
+      templates: [
+        {
+          name: "Accordion",
+          label: "Accordion",
+          fields: [
+            {
+              type: "string",
+              name: "type",
+              label: "Type",
+              required: true,
+              options: ["multiple", "single"]
+            },
+            {
+              type: "object",
+              name: "options",
+              label: "Options",
+              list: true,
+              ui: {
+                itemProps: (item) => {
+                  return {
+                    label: item?.title
+                  };
+                },
+                defaultItem: () => {
+                  return {
+                    uniqueId: crypto.randomUUID()
+                  };
+                }
+              },
+              fields: [
+                {
+                  type: "string",
+                  name: "uniqueId",
+                  label: "Unique ID",
+                  ui: {
+                    component: () => null
+                  }
+                },
+                {
+                  type: "string",
+                  name: "title",
+                  label: "Title"
+                },
+                {
+                  type: "rich-text",
+                  name: "body",
+                  label: "Body",
+                  isBody: true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          name: "TabsView",
+          label: "Tabs View",
+          fields: [
+            {
+              type: "object",
+              name: "groups",
+              label: "Groups",
+              ui: {
+                defaultItem: () => {
+                  return {
+                    tabId: crypto.randomUUID()
+                  };
+                },
+                itemProps: (item) => {
+                  return {
+                    label: item?.tabTitle
+                  };
+                }
+              },
+              list: true,
+              fields: [
+                {
+                  type: "string",
+                  name: "tabId",
+                  label: "Tab ID"
+                },
+                {
+                  type: "string",
+                  name: "tabTitle",
+                  label: "Tab Title"
+                },
+                {
+                  type: "rich-text",
+                  name: "tabContent",
+                  label: "Tab Content",
+                  isBody: true
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 };
@@ -503,8 +575,8 @@ var config_default = defineConfig({
   schema: {
     collections: [
       navigationCollection,
+      pageCollection,
       intentionsCollection,
-      pagesCollection,
       galleryCollection,
       contactCollection
     ]

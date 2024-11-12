@@ -4,8 +4,7 @@ import {
   galleryCollection,
   intentionsCollection,
   navigationCollection,
-  pagesCollection,
-  tabsPageCollection
+  pageCollection
 } from './collections'
 
 export default defineConfig({
@@ -27,9 +26,8 @@ export default defineConfig({
   schema: {
     collections: [
       navigationCollection,
+      pageCollection,
       intentionsCollection,
-      tabsPageCollection,
-      pagesCollection,
       galleryCollection,
       contactCollection
     ]

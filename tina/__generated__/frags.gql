@@ -9,15 +9,13 @@ fragment NavigationParts on Navigation {
       type
       name
       page {
-        ... on Pages {
+        ... on Page {
           __typename
           title
-          slug
-          description
-          template
-          content
           isPublished
-          createdAt
+          showTitle
+          slug
+          body
         }
         ... on Document {
           _sys {
@@ -37,6 +35,15 @@ fragment NavigationParts on Navigation {
   }
 }
 
+fragment PageParts on Page {
+  __typename
+  title
+  isPublished
+  showTitle
+  slug
+  body
+}
+
 fragment IntentionsParts on Intentions {
   __typename
   title
@@ -52,17 +59,6 @@ fragment IntentionsParts on Intentions {
       intention
     }
   }
-}
-
-fragment PagesParts on Pages {
-  __typename
-  title
-  slug
-  description
-  template
-  content
-  isPublished
-  createdAt
 }
 
 fragment GalleryParts on Gallery {
@@ -86,11 +82,11 @@ fragment ContactParts on Contact {
   __typename
   title
   description
-  googleMapsUrl
   contactItems {
     __typename
     label
     description
     value
   }
+  googleMapsUrl
 }
