@@ -12,11 +12,13 @@ export const NavigationListItem = ({
   title,
   children,
   joinCols = false,
+  href,
   ...props
 }: ListItemProps) => (
   <li className={cn('h-full', joinCols && 'col-span-2')}>
     <NavigationMenuLink asChild>
       <Link
+        href={href || '#'}
         className={cn(
           'block h-full w-full select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
           className

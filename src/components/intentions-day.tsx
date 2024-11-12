@@ -14,7 +14,7 @@ export const IntentionsDay = ({ day, date, intentions }: IntentionsDay) => {
           <span className="text-lg pl-2 italic font-thin">({date})</span>
         )}
       </AccordionTrigger>
-      <AccordionContent className="flex flex-col gap-2 even:bg-foreground">
+      <AccordionContent className="flex flex-col gap-2">
         {intentions.map(intention => {
           return (
             <div className="flex gap-2 px-1 lg:px-6 py-4 text-sm lg:text-lg odd:bg-accent">

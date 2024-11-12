@@ -1,6 +1,6 @@
 export const Footer = () => {
   const siteConfig = {
-    title: 'My Awesome Blog',
+    title: 'Strona Parafialna',
     socialLinks: [
       { href: 'https://twitter.com/example', text: 'Twitter' },
       { href: 'https://github.com/example', text: 'GitHub' },
@@ -33,7 +33,7 @@ export const Footer = () => {
       )}
       <div
         className={[
-          'flex flex-col gap-4 border-t border-dashed border-main pt-6',
+          'flex flex-col gap-4 border-t border-dashed border-foreground pt-6',
           socialLinks.length > 0 &&
             'sm:flex-row-reverse sm:items-center sm:justify-between'
         ]
@@ -60,7 +60,7 @@ export const Footer = () => {
           <a className="hover:underline hover:underline-offset-2" href="/">
             {siteConfig.title}
           </a>
-          . All rights reserved.
+          . Wszelkie prawa zastrzeżone.
         </p>
       </div>
     </footer>
