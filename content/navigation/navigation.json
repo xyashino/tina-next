@@ -12,30 +12,6 @@
   "items": [],
   "groups": [
     {
-      "label": "Duszpasterstwo",
-      "isEnabled": true,
-      "links": [
-        {
-          "type": "external",
-          "name": "Sakramenty",
-          "externalUrl": "/page/sacraments",
-          "description": "Informacje o sakramentach..."
-        },
-        {
-          "type": "external",
-          "name": "Pogrzeb",
-          "externalUrl": "/article/funeral",
-          "description": "Procedury związane z pogrzebami..."
-        },
-        {
-          "type": "external",
-          "name": "Grupy Duszpasterskie",
-          "externalUrl": "/articles/groups",
-          "description": "Lista grup działających przy parafii..."
-        }
-      ]
-    },
-    {
       "label": "Aktualności",
       "isEnabled": true,
       "links": [
