@@ -1,0 +1,57 @@
+{
+  "groups": [
+    {
+      "groupTitle": "2024",
+      "isEnabled": true,
+      "images": [
+        {
+          "title": "Orszak Trzech Króli",
+          "isEnabled": true,
+          "link": "https://photos.google.com/share/AF1QipMCM4kwPA7aFx1hQAu7C9khfMDWa14_-GQ7tCIz7LTPVWgZkeX_ryzSXgkNhZ_lZQ",
+          "coverPhoto": "/uploads/JVNM8955.JPG",
+          "description": "Orszak Trzech Króli 2024"
+        },
+        {
+          "title": "Jasełka",
+          "isEnabled": false,
+          "link": "https://photos.google.com/share/AF1QipMCM4kwPA7aFx1hQAu7C9khfMDWa14_-GQ7tCIz7LTPVWgZkeX_ryzSXgkNhZ_lZQ",
+          "coverPhoto": "/uploads/JVNM8955.JPG",
+          "description": "Jasełka w wykonaniu dzieci"
+        }
+      ]
+    },
+    {
+      "groupTitle": "2023",
+      "isEnabled": true,
+      "images": [
+        {
+          "title": "Boże Narodzenie",
+          "isEnabled": true,
+          "link": "https://photos.google.com/share/AF1QipMCM4kwPA7aFx1hQAu7C9khfMDWa14_-GQ7tCIz7LTPVWgZkeX_ryzSXgkNhZ_lZQ",
+          "coverPhoto": "/uploads/JVNM8955.JPG",
+          "description": "Dekoracje świąteczne"
+        }
+      ]
+    },
+    {
+      "groupTitle": "2022",
+      "isEnabled": true,
+      "images": [
+        {
+          "title": "Odpust parafialny",
+          "isEnabled": true,
+          "link": "https://photos.google.com/share/AF1QipMCM4kwPA7aFx1hQAu7C9khfMDWa14_-GQ7tCIz7LTPVWgZkeX_ryzSXgkNhZ_lZQ",
+          "coverPhoto": "/uploads/JVNM8955.JPG",
+          "description": "Uroczystości odpustowe"
+        },
+        {
+          "title": "Pierwsza Komunia Święta",
+          "isEnabled": true,
+          "link": "https://photos.google.com/share/AF1QipMCM4kwPA7aFx1hQAu7C9khfMDWa14_-GQ7tCIz7LTPVWgZkeX_ryzSXgkNhZ_lZQ",
+          "coverPhoto": "/uploads/JVNM8955.JPG",
+          "description": "Uroczystość Pierwszej Komunii Świętej"
+        }
+      ]
+    }
+  ]
+}

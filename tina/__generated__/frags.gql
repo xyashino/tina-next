@@ -1,0 +1,102 @@
+fragment NavigationParts on Navigation {
+  __typename
+  groups {
+    __typename
+    label
+    isEnabled
+    links {
+      __typename
+      type
+      name
+      page {
+        ... on Page {
+          __typename
+          isPublished
+          showTitle
+          slug
+          image
+          title
+          body
+        }
+        ... on Document {
+          _sys {
+            filename
+            basename
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+      }
+      externalUrl
+      description
+    }
+  }
+}
+
+fragment PageParts on Page {
+  __typename
+  isPublished
+  showTitle
+  slug
+  image
+  title
+  body
+}
+
+fragment IntentionsParts on Intentions {
+  __typename
+  title
+  isActive
+  startDate
+  description
+  days {
+    __typename
+    day
+    intentions {
+      __typename
+      hour
+      intention
+    }
+  }
+}
+
+fragment AnnouncementsParts on Announcements {
+  __typename
+  title
+  description
+  date
+  body
+}
+
+fragment GalleryParts on Gallery {
+  __typename
+  groups {
+    __typename
+    groupTitle
+    isEnabled
+    images {
+      __typename
+      title
+      isEnabled
+      link
+      coverPhoto
+      description
+    }
+  }
+}
+
+fragment ContactParts on Contact {
+  __typename
+  title
+  description
+  contactItems {
+    __typename
+    label
+    description
+    value
+  }
+  googleMapsUrl
+}

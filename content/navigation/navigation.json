@@ -1,0 +1,123 @@
+{
+  "title": "test",
+  "display": true,
+  "label": "Strona Główna",
+  "type": "group",
+  "link": {
+    "type": "external",
+    "page": "",
+    "externalUrl": "/"
+  },
+  "isEnabled": true,
+  "items": [],
+  "groups": [
+    {
+      "label": "Aktualności",
+      "isEnabled": true,
+      "links": [
+        {
+          "type": "external",
+          "name": "Ogłoszenia Parafialne",
+          "externalUrl": "/announcements",
+          "description": "Aktualne ogłosznenia na ten tydzień..."
+        },
+        {
+          "type": "external",
+          "name": "Intencje Parafialne",
+          "externalUrl": "/intentions",
+          "description": "Aktualne intencje na ten tydzien..."
+        },
+        {
+          "type": "external",
+          "name": "Aktualności",
+          "externalUrl": "/news",
+          "description": "Aktualne informacje..."
+        }
+      ]
+    },
+    {
+      "label": "Duszpasterstwo",
+      "isEnabled": true,
+      "links": [
+        {
+          "type": "external",
+          "name": "Sakramenty",
+          "externalUrl": "/page/sacraments",
+          "description": "Informacje o sakramentach..."
+        },
+        {
+          "type": "external",
+          "name": "Pogrzeb",
+          "externalUrl": "/article/funeral",
+          "description": "Procedury związane z pogrzebami..."
+        },
+        {
+          "type": "external",
+          "name": "Grupy Duszpasterskie",
+          "externalUrl": "/articles/groups",
+          "description": "Lista grup działających przy parafii..."
+        }
+      ]
+    },
+    {
+      "label": "Parafia",
+      "isEnabled": true,
+      "links": [
+        {
+          "type": "external",
+          "name": "Patron",
+          "externalUrl": "/article/patron",
+          "description": "Informacje o patronie parafii..."
+        },
+        {
+          "type": "external",
+          "name": "Nabożeństwa",
+          "externalUrl": "/article/services",
+          "description": "Harmonogram nabożeństw..."
+        },
+        {
+          "type": "external",
+          "name": "Rada Duszpasterska",
+          "externalUrl": "/article/council",
+          "description": "Zadania i działania rady duszpasterskiej..."
+        },
+        {
+          "type": "external",
+          "name": "Historia Parafii",
+          "externalUrl": "/article/history",
+          "description": "Historyczne informacje dotyczące parafii..."
+        },
+        {
+          "type": "external",
+          "name": "Kancelaria Parafialna",
+          "externalUrl": "/article/office",
+          "description": "Godziny otwarcia i kontakt do kancelarii..."
+        }
+      ]
+    },
+    {
+      "label": "Galeria",
+      "isEnabled": true,
+      "links": [
+        {
+          "type": "external",
+          "name": "Galeria",
+          "externalUrl": "/gallery",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "label": "Kontakt",
+      "isEnabled": true,
+      "links": [
+        {
+          "type": "external",
+          "name": "Kontakt",
+          "externalUrl": "/contact",
+          "description": ""
+        }
+      ]
+    }
+  ]
+}

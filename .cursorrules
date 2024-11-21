@@ -1,0 +1,10 @@
+Stack:
+- Next.js
+- Tailwind CSS
+- TypeScript
+- TinaCMS
+
+prefer:
+- use tailwind css classes
+- use tina cms for content
+- use arrow functions
