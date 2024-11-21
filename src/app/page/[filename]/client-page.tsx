@@ -6,14 +6,12 @@ interface ClientPageProps {
   query: string
   variables: object
   data: any
-  isPublished: boolean
 }
 
 export const ClientPage = ({
   query,
   variables,
   data,
-  isPublished
 }: ClientPageProps) => {
   const { data: tinaData } = useTina({
     query: query,

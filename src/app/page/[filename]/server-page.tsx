@@ -4,7 +4,9 @@ import type { Page } from '@/tina/types'
 import Image from 'next/image'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
 
-export const ServerPage = ({ title, body, showTitle, image }: Page) => {
+type ServerPageProps = Pick<Page, 'title' | 'body' | 'showTitle' | 'image'>
+
+export const ServerPage = ({ title, body, showTitle, image }: ServerPageProps) => {
   return (
     <div className="prose max-w-3xl">
       {image && (
