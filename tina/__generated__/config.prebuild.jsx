@@ -1,6 +1,57 @@
 // tina/config.ts
 import { defineConfig } from "tinacms";
 
+// tina/utils.ts
+var getNextDay = (day) => {
+  const today = /* @__PURE__ */ new Date();
+  const nextDay = new Date(today);
+  nextDay.setDate(today.getDate() + (day + 7 - (today.getDay() - 1)) % 7);
+  return nextDay.toISOString();
+};
+
+// tina/collections/annoucements-collection.ts
+var anoucementsCollection = {
+  label: "Og\u0142oszenia",
+  name: "announcements",
+  path: "announcements",
+  ui: {
+    filename: {
+      readonly: true,
+      slugify: (data) => data?.title?.toLowerCase().replace(/\s+/g, "-")
+    }
+  },
+  defaultItem: {
+    date: getNextDay(0)
+  },
+  fields: [
+    {
+      type: "string",
+      name: "title",
+      label: "Tytu\u0142",
+      isTitle: true,
+      required: true
+    },
+    {
+      type: "string",
+      name: "description",
+      label: "Opis"
+    },
+    {
+      type: "datetime",
+      name: "date",
+      label: "Data",
+      ui: {
+        description: "Ustaw dat\u0119, aby og\u0142oszenie by\u0142o widoczne na stronie. Musi by\u0107 to poniedzia\u0142ek danego tygodnia."
+      }
+    },
+    {
+      type: "rich-text",
+      name: "body",
+      label: "Tre\u015B\u0107"
+    }
+  ]
+};
+
 // tina/collections/contact-collection.ts
 var contactCollection = {
   name: "contact",
@@ -163,12 +214,6 @@ var POLISH_DAYS = [
   "Sobota",
   "Niedziela"
 ];
-var getNextDay = (day) => {
-  const today = /* @__PURE__ */ new Date();
-  const nextDay = new Date(today);
-  nextDay.setDate(today.getDate() + (day + 7 - (today.getDay() - 1)) % 7);
-  return nextDay.toISOString();
-};
 var INITIAL_INTENTIONS = Array.from({ length: 7 }, (_, i) => i).map((day) => ({
   day: day.toString(),
   date: getNextDay(day),
@@ -593,6 +638,7 @@ var config_default = defineConfig({
       navigationCollection,
       pageCollection,
       intentionsCollection,
+      anoucementsCollection,
       galleryCollection,
       contactCollection
     ]

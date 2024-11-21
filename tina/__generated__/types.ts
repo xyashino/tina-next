@@ -87,6 +87,8 @@ export type Query = {
   pageConnection: PageConnection;
   intentions: Intentions;
   intentionsConnection: IntentionsConnection;
+  announcements: Announcements;
+  announcementsConnection: AnnouncementsConnection;
   gallery: Gallery;
   galleryConnection: GalleryConnection;
   contact: Contact;
@@ -160,6 +162,21 @@ export type QueryIntentionsConnectionArgs = {
 };
 
 
+export type QueryAnnouncementsArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryAnnouncementsConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<AnnouncementsFilter>;
+};
+
+
 export type QueryGalleryArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -193,6 +210,7 @@ export type DocumentFilter = {
   navigation?: InputMaybe<NavigationFilter>;
   page?: InputMaybe<PageFilter>;
   intentions?: InputMaybe<IntentionsFilter>;
+  announcements?: InputMaybe<AnnouncementsFilter>;
   gallery?: InputMaybe<GalleryFilter>;
   contact?: InputMaybe<ContactFilter>;
 };
@@ -234,7 +252,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Navigation | Page | Intentions | Gallery | Contact | Folder;
+export type DocumentNode = Navigation | Page | Intentions | Announcements | Gallery | Contact | Folder;
 
 export type NavigationGroupsLinksPage = Page;
 
@@ -446,6 +464,37 @@ export type IntentionsConnection = Connection & {
   edges?: Maybe<Array<Maybe<IntentionsConnectionEdges>>>;
 };
 
+export type Announcements = Node & Document & {
+  __typename?: 'Announcements';
+  title: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  date?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['JSON']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type AnnouncementsFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  date?: InputMaybe<DatetimeFilter>;
+  body?: InputMaybe<RichTextFilter>;
+};
+
+export type AnnouncementsConnectionEdges = {
+  __typename?: 'AnnouncementsConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Announcements>;
+};
+
+export type AnnouncementsConnection = Connection & {
+  __typename?: 'AnnouncementsConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<AnnouncementsConnectionEdges>>>;
+};
+
 export type GalleryGroupsImages = {
   __typename?: 'GalleryGroupsImages';
   title: Scalars['String']['output'];
@@ -558,6 +607,8 @@ export type Mutation = {
   createPage: Page;
   updateIntentions: Intentions;
   createIntentions: Intentions;
+  updateAnnouncements: Announcements;
+  createAnnouncements: Announcements;
   updateGallery: Gallery;
   createGallery: Gallery;
   updateContact: Contact;
@@ -634,6 +685,18 @@ export type MutationCreateIntentionsArgs = {
 };
 
 
+export type MutationUpdateAnnouncementsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: AnnouncementsMutation;
+};
+
+
+export type MutationCreateAnnouncementsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: AnnouncementsMutation;
+};
+
+
 export type MutationUpdateGalleryArgs = {
   relativePath: Scalars['String']['input'];
   params: GalleryMutation;
@@ -661,6 +724,7 @@ export type DocumentUpdateMutation = {
   navigation?: InputMaybe<NavigationMutation>;
   page?: InputMaybe<PageMutation>;
   intentions?: InputMaybe<IntentionsMutation>;
+  announcements?: InputMaybe<AnnouncementsMutation>;
   gallery?: InputMaybe<GalleryMutation>;
   contact?: InputMaybe<ContactMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
@@ -670,6 +734,7 @@ export type DocumentMutation = {
   navigation?: InputMaybe<NavigationMutation>;
   page?: InputMaybe<PageMutation>;
   intentions?: InputMaybe<IntentionsMutation>;
+  announcements?: InputMaybe<AnnouncementsMutation>;
   gallery?: InputMaybe<GalleryMutation>;
   contact?: InputMaybe<ContactMutation>;
 };
@@ -719,6 +784,13 @@ export type IntentionsMutation = {
   days?: InputMaybe<Array<InputMaybe<IntentionsDaysMutation>>>;
 };
 
+export type AnnouncementsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  date?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
+};
+
 export type GalleryGroupsImagesMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   isEnabled?: InputMaybe<Scalars['Boolean']['input']>;
@@ -755,6 +827,8 @@ export type NavigationPartsFragment = { __typename: 'Navigation', groups?: Array
 export type PagePartsFragment = { __typename: 'Page', isPublished?: boolean | null, showTitle?: boolean | null, slug: string, image?: string | null, title: string, body?: any | null };
 
 export type IntentionsPartsFragment = { __typename: 'Intentions', title: string, isActive: boolean, startDate: string, description?: string | null, days?: Array<{ __typename: 'IntentionsDays', day: string, intentions?: Array<{ __typename: 'IntentionsDaysIntentions', hour: string, intention: any } | null> | null } | null> | null };
+
+export type AnnouncementsPartsFragment = { __typename: 'Announcements', title: string, description?: string | null, date?: string | null, body?: any | null };
 
 export type GalleryPartsFragment = { __typename: 'Gallery', groups?: Array<{ __typename: 'GalleryGroups', groupTitle: string, isEnabled?: boolean | null, images?: Array<{ __typename: 'GalleryGroupsImages', title: string, isEnabled?: boolean | null, link: string, coverPhoto?: string | null, description?: string | null } | null> | null } | null> | null };
 
@@ -816,6 +890,25 @@ export type IntentionsConnectionQueryVariables = Exact<{
 
 
 export type IntentionsConnectionQuery = { __typename?: 'Query', intentionsConnection: { __typename?: 'IntentionsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'IntentionsConnectionEdges', cursor: string, node?: { __typename: 'Intentions', id: string, title: string, isActive: boolean, startDate: string, description?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, days?: Array<{ __typename: 'IntentionsDays', day: string, intentions?: Array<{ __typename: 'IntentionsDaysIntentions', hour: string, intention: any } | null> | null } | null> | null } | null } | null> | null } };
+
+export type AnnouncementsQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type AnnouncementsQuery = { __typename?: 'Query', announcements: { __typename: 'Announcements', id: string, title: string, description?: string | null, date?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type AnnouncementsConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<AnnouncementsFilter>;
+}>;
+
+
+export type AnnouncementsConnectionQuery = { __typename?: 'Query', announcementsConnection: { __typename?: 'AnnouncementsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AnnouncementsConnectionEdges', cursor: string, node?: { __typename: 'Announcements', id: string, title: string, description?: string | null, date?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type GalleryQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -921,6 +1014,15 @@ export const IntentionsPartsFragmentDoc = gql`
       intention
     }
   }
+}
+    `;
+export const AnnouncementsPartsFragmentDoc = gql`
+    fragment AnnouncementsParts on Announcements {
+  __typename
+  title
+  description
+  date
+  body
 }
     `;
 export const GalleryPartsFragmentDoc = gql`
@@ -1120,6 +1222,61 @@ export const IntentionsConnectionDocument = gql`
   }
 }
     ${IntentionsPartsFragmentDoc}`;
+export const AnnouncementsDocument = gql`
+    query announcements($relativePath: String!) {
+  announcements(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...AnnouncementsParts
+  }
+}
+    ${AnnouncementsPartsFragmentDoc}`;
+export const AnnouncementsConnectionDocument = gql`
+    query announcementsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: AnnouncementsFilter) {
+  announcementsConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...AnnouncementsParts
+      }
+    }
+  }
+}
+    ${AnnouncementsPartsFragmentDoc}`;
 export const GalleryDocument = gql`
     query gallery($relativePath: String!) {
   gallery(relativePath: $relativePath) {
@@ -1250,6 +1407,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     intentionsConnection(variables?: IntentionsConnectionQueryVariables, options?: C): Promise<{data: IntentionsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: IntentionsConnectionQueryVariables, query: string}> {
         return requester<{data: IntentionsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: IntentionsConnectionQueryVariables, query: string}, IntentionsConnectionQueryVariables>(IntentionsConnectionDocument, variables, options);
+      },
+    announcements(variables: AnnouncementsQueryVariables, options?: C): Promise<{data: AnnouncementsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AnnouncementsQueryVariables, query: string}> {
+        return requester<{data: AnnouncementsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AnnouncementsQueryVariables, query: string}, AnnouncementsQueryVariables>(AnnouncementsDocument, variables, options);
+      },
+    announcementsConnection(variables?: AnnouncementsConnectionQueryVariables, options?: C): Promise<{data: AnnouncementsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AnnouncementsConnectionQueryVariables, query: string}> {
+        return requester<{data: AnnouncementsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AnnouncementsConnectionQueryVariables, query: string}, AnnouncementsConnectionQueryVariables>(AnnouncementsConnectionDocument, variables, options);
       },
     gallery(variables: GalleryQueryVariables, options?: C): Promise<{data: GalleryQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GalleryQueryVariables, query: string}> {
         return requester<{data: GalleryQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GalleryQueryVariables, query: string}, GalleryQueryVariables>(GalleryDocument, variables, options);

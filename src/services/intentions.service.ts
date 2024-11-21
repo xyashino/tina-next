@@ -1,3 +1,4 @@
+import { getCurrentMonday, getDayOfWeek, getNextMonday } from '@/lib/utils'
 import client from '@/tina/client'
 import type {
   IntentionsDays,
@@ -18,38 +19,6 @@ const POLISH_DAYS = [
   'Niedziela'
 ]
 
-const getCurrentMonday = () => {
-  const today = new Date()
-  const dayOfWeek = today.getDay()
-  const diff = dayOfWeek === 0 ? 6 : dayOfWeek - 1
-  const monday = new Date(today)
-  monday.setDate(today.getDate() - diff)
-  monday.setHours(-1, 0, 0, 0)
-  return monday.toISOString()
-}
-
-const getNextMonday = () => {
-  const today = new Date()
-  const dayOfWeek = today.getDay()
-  const diff = dayOfWeek === 0 ? 1 : 8 - dayOfWeek
-  const nextMonday = new Date(today)
-  nextMonday.setDate(today.getDate() + diff)
-  nextMonday.setHours(-1, 0, 0, 0)
-  return nextMonday.toISOString()
-}
-
-const getDayOfWeek = (dayIndex: number) => {
-  const monday = new Date(getCurrentMonday())
-  const date = new Date(monday)
-  date.setDate(monday.getDate() + dayIndex)
-
-  const day = String(date.getDate()).padStart(2, '0')
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  const year = date.getFullYear()
-
-  return `${day}-${month}-${year}`
-}
-
 export const getActiveIntentions = async () => {
   const intentions = await client.queries.intentionsConnection({
     filter: {
@@ -64,11 +33,6 @@ export const getActiveIntentions = async () => {
     sort: 'startDate_DESC'
   })
   const intentionsData = intentions.data.intentionsConnection.edges?.[0]?.node
-
-  console.log({
-    currentMonday: getCurrentMonday(),
-    nextMonday: getNextMonday()
-  })
 
   const result = {
     title: intentionsData?.title || 'Intencje Parafialne',

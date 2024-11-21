@@ -1,4 +1,5 @@
 import type { Collection } from 'tinacms'
+import { getNextDay } from '../utils'
 
 const POLISH_DAYS = [
   'Poniedziałek',
@@ -10,12 +11,6 @@ const POLISH_DAYS = [
   'Niedziela'
 ]
 
-const getNextDay = (day: number) => {
-  const today = new Date()
-  const nextDay = new Date(today)
-  nextDay.setDate(today.getDate() + ((day + 7 - (today.getDay() - 1)) % 7))
-  return nextDay.toISOString()
-}
 
 const INITIAL_INTENTIONS = Array.from({ length: 7 }, (_, i) => i).map(day => ({
   day: day.toString(),

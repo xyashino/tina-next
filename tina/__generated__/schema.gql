@@ -59,6 +59,8 @@ type Query {
   pageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PageFilter): PageConnection!
   intentions(relativePath: String): Intentions!
   intentionsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: IntentionsFilter): IntentionsConnection!
+  announcements(relativePath: String): Announcements!
+  announcementsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: AnnouncementsFilter): AnnouncementsConnection!
   gallery(relativePath: String): Gallery!
   galleryConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: GalleryFilter): GalleryConnection!
   contact(relativePath: String): Contact!
@@ -69,6 +71,7 @@ input DocumentFilter {
   navigation: NavigationFilter
   page: PageFilter
   intentions: IntentionsFilter
+  announcements: AnnouncementsFilter
   gallery: GalleryFilter
   contact: ContactFilter
 }
@@ -96,7 +99,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Navigation | Page | Intentions | Gallery | Contact | Folder
+union DocumentNode = Navigation | Page | Intentions | Announcements | Gallery | Contact | Folder
 
 union NavigationGroupsLinksPage = Page
 
@@ -295,6 +298,34 @@ type IntentionsConnection implements Connection {
   edges: [IntentionsConnectionEdges]
 }
 
+type Announcements implements Node & Document {
+  title: String!
+  description: String
+  date: String
+  body: JSON
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input AnnouncementsFilter {
+  title: StringFilter
+  description: StringFilter
+  date: DatetimeFilter
+  body: RichTextFilter
+}
+
+type AnnouncementsConnectionEdges {
+  cursor: String!
+  node: Announcements
+}
+
+type AnnouncementsConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [AnnouncementsConnectionEdges]
+}
+
 type GalleryGroupsImages {
   title: String!
   isEnabled: Boolean
@@ -397,6 +428,8 @@ type Mutation {
   createPage(relativePath: String!, params: PageMutation!): Page!
   updateIntentions(relativePath: String!, params: IntentionsMutation!): Intentions!
   createIntentions(relativePath: String!, params: IntentionsMutation!): Intentions!
+  updateAnnouncements(relativePath: String!, params: AnnouncementsMutation!): Announcements!
+  createAnnouncements(relativePath: String!, params: AnnouncementsMutation!): Announcements!
   updateGallery(relativePath: String!, params: GalleryMutation!): Gallery!
   createGallery(relativePath: String!, params: GalleryMutation!): Gallery!
   updateContact(relativePath: String!, params: ContactMutation!): Contact!
@@ -407,6 +440,7 @@ input DocumentUpdateMutation {
   navigation: NavigationMutation
   page: PageMutation
   intentions: IntentionsMutation
+  announcements: AnnouncementsMutation
   gallery: GalleryMutation
   contact: ContactMutation
   relativePath: String
@@ -416,6 +450,7 @@ input DocumentMutation {
   navigation: NavigationMutation
   page: PageMutation
   intentions: IntentionsMutation
+  announcements: AnnouncementsMutation
   gallery: GalleryMutation
   contact: ContactMutation
 }
@@ -463,6 +498,13 @@ input IntentionsMutation {
   startDate: String
   description: String
   days: [IntentionsDaysMutation]
+}
+
+input AnnouncementsMutation {
+  title: String
+  description: String
+  date: String
+  body: JSON
 }
 
 input GalleryGroupsImagesMutation {

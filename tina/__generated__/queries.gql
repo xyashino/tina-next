@@ -157,6 +157,59 @@ query intentionsConnection($before: String, $after: String, $first: Float, $last
   }
 }
 
+query announcements($relativePath: String!) {
+  announcements(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...AnnouncementsParts
+  }
+}
+
+query announcementsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: AnnouncementsFilter) {
+  announcementsConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...AnnouncementsParts
+      }
+    }
+  }
+}
+
 query gallery($relativePath: String!) {
   gallery(relativePath: $relativePath) {
     ... on Document {

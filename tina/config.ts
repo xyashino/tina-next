@@ -1,5 +1,6 @@
 import { defineConfig } from 'tinacms'
 import {
+  anoucementsCollection,
   contactCollection,
   galleryCollection,
   intentionsCollection,
@@ -28,6 +29,7 @@ export default defineConfig({
       navigationCollection,
       pageCollection,
       intentionsCollection,
+      anoucementsCollection,
       galleryCollection,
       contactCollection
     ]

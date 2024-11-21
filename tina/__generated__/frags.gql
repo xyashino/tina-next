@@ -63,6 +63,14 @@ fragment IntentionsParts on Intentions {
   }
 }
 
+fragment AnnouncementsParts on Announcements {
+  __typename
+  title
+  description
+  date
+  body
+}
+
 fragment GalleryParts on Gallery {
   __typename
   groups {

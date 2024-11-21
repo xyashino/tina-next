@@ -16,20 +16,24 @@ export const generateStaticParams = async () => {
 }
 
 const PostPage = async ({ params }: PostPageProps) => {
-  const { isEnabled } = draftMode()
-  const pageResponse = await client.queries.page({
-    relativePath: `${params.filename}.mdx`
-  })
-  const page = pageResponse.data.page
-  if (!page) return notFound()
+  try {
+    const { isEnabled } = draftMode()
+    const pageResponse = await client.queries.page({
+      relativePath: `${params.filename}.mdx`
+    })
+    const page = pageResponse.data.page
+    if (!page) return notFound()
 
-  if (!isEnabled) {
-    return <ClientPage {...pageResponse} />
+    if (!isEnabled) {
+      return <ClientPage {...pageResponse} />
+    }
+
+    if (!page.isPublished) return notFound()
+
+    return <ServerPage {...page} />
+  } catch (error) {
+    return notFound()
   }
-
-  if (!page.isPublished) return notFound()
-
-  return <ServerPage {...page} />
 }
 
 export default PostPage
