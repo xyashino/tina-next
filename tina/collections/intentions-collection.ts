@@ -11,13 +11,6 @@ const POLISH_DAYS = [
   'Niedziela'
 ]
 
-
-const INITIAL_INTENTIONS = Array.from({ length: 7 }, (_, i) => i).map(day => ({
-  day: day.toString(),
-  date: getNextDay(day),
-  intentions: [{ hour: '09:00', intention: '' }]
-}))
-
 export const intentionsCollection: Collection = {
   name: 'intentions',
   label: 'Intencje',
@@ -26,7 +19,11 @@ export const intentionsCollection: Collection = {
   defaultItem: {
     title: 'Intencje parafialne',
     startDate: getNextDay(0),
-    days: INITIAL_INTENTIONS,
+    days: Array.from({ length: 7 }, (_, i) => i).map(day => ({
+      day: day.toString(),
+      date: getNextDay(day),
+      intentions: [{ hour: '09:00', intention: '' }]
+    })),
     isActive: true
   },
   ui: {
