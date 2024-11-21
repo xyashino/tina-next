@@ -67,7 +67,7 @@ importers:
         specifier: ^1.5.42
         version: 1.6.10(@codemirror/language@6.0.0)(@types/node@20.17.3)(@types/react-dom@18.3.1)(@types/react@18.3.12)(abstract-level@1.0.4)(immer@10.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.5)(scheduler@0.25.0-rc-02c0e824-20241028)(sucrase@3.35.0)
       '@types/node':
-        specifier: ^20
+        specifier: ^20.17.3
         version: 20.17.3
       '@types/react':
         specifier: ^18
