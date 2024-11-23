@@ -123,7 +123,6 @@ var contactCollection = {
 };
 
 // tina/collections/gallery-collection.ts
-import "tinacms";
 var galleryCollection = {
   name: "gallery",
   label: "Galeria",

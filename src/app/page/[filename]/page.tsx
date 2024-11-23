@@ -18,9 +18,12 @@ export const generateStaticParams = async () => {
 const PostPage = async ({ params }: PostPageProps) => {
   try {
     const { isEnabled } = draftMode()
+
     const pageResponse = await client.queries.page({
-      relativePath: `${params.filename}.mdx`
+      relativePath: `${params.filename}.mdx`,
+      draftMode: isEnabled
     })
+
     const page = pageResponse.data.page
     if (!page) return notFound()
 
