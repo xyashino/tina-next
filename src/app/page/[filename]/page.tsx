@@ -1,25 +1,40 @@
 import { client } from '@/tina/client'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
+import { z } from 'zod'
 import { ClientPage } from './client-page'
 import { ServerPage } from './server-page'
 
-interface PostPageProps {
-  params: { filename: string }
+interface PageProps {
+  params: unknown
 }
 
 export const generateStaticParams = async () => {
   const pagesResponse = await client.queries.pageConnection()
-  return pagesResponse.data.pageConnection.edges?.map(page => ({
-    filename: page?.node?._sys.filename
-  }))
+  const paths =
+    pagesResponse.data.pageConnection.edges
+      ?.map(page => {
+        if (!page?.node?._sys.filename) return null
+        const filename = page.node._sys.filename
+        return { filename }
+      })
+      .filter(Boolean) || []
+  return paths || []
 }
 
-const PostPage = async ({ params }: PostPageProps) => {
+const paramsSchema = z.object({
+  filename: z.string()
+})
+
+const PostPage = async (props: PageProps) => {
   try {
+    if (!props?.params) return notFound()
+    const parsedParams = paramsSchema.safeParse(props.params)
+    if (!parsedParams.success) return notFound()
+
     const { isEnabled } = draftMode()
     const pageResponse = await client.queries.page({
-      relativePath: `${params.filename}.mdx`
+      relativePath: `${parsedParams.data.filename}.mdx`
     })
     const page = pageResponse.data.page
     if (!page) return notFound()

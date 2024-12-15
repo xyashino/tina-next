@@ -6,7 +6,10 @@ import { Newsreader } from 'next/font/google'
 import type { PropsWithChildren } from 'react'
 import './globals.css'
 
-const inter = Newsreader({ subsets: ['latin'] })
+const newsreader = Newsreader({
+  subsets: ['latin'],
+  variable: '--font-newsreader',
+})
 
 export const metadata: Metadata = {
   title: 'Parish Website',
