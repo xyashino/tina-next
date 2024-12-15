@@ -3,7 +3,6 @@
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": "error",
-    "no-unused-vars": "warn",
-    "@next/next/no-html-link-for-pages": "off"
+    "no-unused-vars": "warn"
   }
 }

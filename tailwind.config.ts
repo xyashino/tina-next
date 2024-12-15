@@ -6,7 +6,7 @@ export default {
   theme: {
     fontFamily: {
       sans: ['Inter', ...defaultTheme.fontFamily.sans],
-      serif: ['Newsreader', ...defaultTheme.fontFamily.serif]
+      serif: ['var(--font-newsreader)', ...defaultTheme.fontFamily.serif]
     },
     extend: {
       keyframes: {
