@@ -21,7 +21,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
     <html lang="en">
       <body
         className={cn(
-          inter.className,
+          newsreader.className,
           'bg-background text-foreground min-h-screen m-0 p-0 min-w-screen'
         )}
       >
